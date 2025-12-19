@@ -47,10 +47,9 @@ body{
   justify-content: space-between;
   margin-bottom: 15px;
   padding: 8px 12px;
-  background: white;
+  background: #0a3b40;
   border-radius: 6px;
   box-shadow: var(--shadow);
-  border-bottom: 3px solid var(--primary-color);
 }
 
 .header-left {
@@ -63,18 +62,18 @@ body{
   width: 35px;
   height: 35px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .header-title {
   font-size: 14px;
   font-weight: 700;
-  color: var(--primary-color);
+  color: white;
 }
 
 .header-right {
   font-size: 12px;
-  color: var(--text-color);
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .tool{
@@ -302,119 +301,179 @@ body{
   text-align: center;
 }
 
-/* ===== التقرير (لطباعة PDF - غير متغير) ===== */
+/* ===== التقرير (لطباعة PDF - تم تحسينه) ===== */
 .report{display:none;}
-@page{size:A4;margin:14mm;}
+@page{size:A4;margin:10mm;}
 
 @media print{
-  body{background:white;padding:0}
+  body{
+    background:white;
+    padding:0;
+    margin:0;
+    font-size: 12px;
+  }
+  
   .tool{display:none}
-  .report{display:block}
+  .report{
+    display:block;
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+  }
 
   /* ===== الهيدر المصغر ===== */
   .header{
-    background:var(--primary-color);
+    background:#0a3b40;
     color:white;
-    padding:4px 6px;
-    border-radius:6px;
+    padding:3px 4px;
+    border-radius:4px;
     text-align:center;
-    font-size:11px;
-    margin-bottom:6px;
+    font-size:10px;
+    margin-bottom:4px;
+    page-break-inside: avoid;
   }
 
   /* ===== معلومات التقرير (مصغّرة) ===== */
   .info-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    gap:5px;
-    margin-bottom:6px;
+    gap:3px;
+    margin-bottom:4px;
+    page-break-inside: avoid;
   }
   .info-box{
-    border:2px solid var(--border-color);
-    border-radius:7px;
-    padding:3px 4px;
+    border:1px solid var(--border-color);
+    border-radius:5px;
+    padding:2px 3px;
     text-align:center;
-    font-size:10px;
+    font-size:9px;
+    min-height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-inside: avoid;
   }
   .info-box span{
     display:block;
-    background:var(--primary-color);
+    background:#0a3b40;
     color:white;
-    border-radius:5px;
-    padding:1px;
+    border-radius:3px;
+    padding:1px 2px;
     font-weight:700;
-    font-size:9px;
+    font-size:8px;
     margin-bottom:2px;
+    page-break-inside: avoid;
   }
 
   /* ===== المحتوى ===== */
   .grid-desc{
     display:flex;
-    gap:8px;
-    margin-bottom:8px;
+    gap:5px;
+    margin-bottom:5px;
+    page-break-inside: avoid;
   }
 
   .desc-box{
-    border:2px solid var(--border-color);
-    border-radius:10px;
-    padding:8px;
+    border:1px solid var(--border-color);
+    border-radius:6px;
+    padding:5px 6px;
     background:#f9fbfb;
-    font-size:12px;
+    font-size:10px;
     display:flex;
     flex-direction:column;
+    min-height: 85px;
+    page-break-inside: avoid;
   }
-  .desc-box.big{min-height:110px;flex:1}
-  .desc-box.small{min-height:80px;flex:1}
+  .desc-box.big{
+    flex:1;
+    min-height: 85px;
+    page-break-inside: avoid;
+  }
+  .desc-box.small{
+    flex:1;
+    min-height: 70px;
+    page-break-inside: avoid;
+  }
 
   .desc-box strong{
     border-bottom:1px dashed var(--border-color);
-    padding-bottom:4px;
-    margin-bottom:6px;
-    color:var(--primary-color);
+    padding-bottom:3px;
+    margin-bottom:4px;
+    color:#0a3b40;
+    font-size:10px;
+    page-break-inside: avoid;
   }
-  .desc-box p{white-space:pre-line;flex:1}
+  .desc-box p{
+    white-space:pre-line;
+    flex:1;
+    margin:0;
+    font-size:9.5px;
+    page-break-inside: avoid;
+  }
 
   .vertical{
-    width:32px;
+    width:20px;
     background:#eef3f1;
-    border-radius:8px;
+    border-radius:5px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:700;
+    font-size:10px;
+    page-break-inside: avoid;
   }
 
   /* ===== الصور ===== */
   .images{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-top:12px;
+    gap:6px;
+    margin-top:8px;
+    page-break-inside: avoid;
   }
   .images img{
     width:100%;
-    height:120px;
+    height:90px;
     object-fit:cover;
-    border-radius:8px;
+    border-radius:5px;
+    page-break-inside: avoid;
   }
 
   /* ===== التوقيعات ===== */
   .signatures{
-    margin-top:22px;
+    margin-top:15px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:40px;
-    border-top:2px solid var(--border-color);
-    padding-top:14px;
+    gap:25px;
+    border-top:1px solid var(--border-color);
+    padding-top:10px;
+    page-break-inside: avoid;
+    page-break-before: avoid;
   }
   .signature-box{
     text-align:center;
-    font-size:12px;
+    font-size:10px;
+    page-break-inside: avoid;
   }
   .signature-line{
-    border-bottom:2px solid #000;
-    height:26px;
-    margin:8px 0;
+    border-bottom:1px solid #000;
+    height:20px;
+    margin:5px 0;
+    page-break-inside: avoid;
+  }
+  
+  /* منع انبثاق صفحة جديدة */
+  .report * {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+    page-break-before: avoid;
+  }
+  
+  .report {
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
   }
 }
 </style>
@@ -491,27 +550,27 @@ body{
 
       <div class="form-group">
         <label for="date">تاريخ التنفيذ</label>
-        <input id="date" type="text" placeholder="يوم/شهر/سنة" oninput="sync('date',this.value)">
+        <input id="date" type="text" placeholder="يوم/شهر/سنة" oninput="sync('date',this.value)" value="١٤٤٦/٠٧/٢٠">
       </div>
 
       <div class="form-group">
         <label for="target">المستهدفون</label>
-        <input id="target" type="text" placeholder="حدد الفئة المستهدفة" oninput="sync('target',this.value)">
+        <input id="target" type="text" placeholder="الطلاب - الفئة العمرية - الصف" oninput="sync('target',this.value)" value="طلاب الصف السادس">
       </div>
 
       <div class="form-group">
         <label for="count">عدد المستفيدين</label>
-        <input id="count" type="text" placeholder="أدخل العدد" oninput="sync('count',this.value)">
+        <input id="count" type="text" placeholder="أدخل العدد" oninput="sync('count',this.value)" value="٣٠">
       </div>
 
       <div class="form-group">
         <label for="teacher">اسم المعلم</label>
-        <input id="teacher" type="text" placeholder="أدخل اسم المعلم" oninput="sync('teacher',this.value)">
+        <input id="teacher" type="text" placeholder="أدخل اسم المعلم" oninput="sync('teacher',this.value)" value="أحمد بن محمد السعيد">
       </div>
 
       <div class="form-group">
         <label for="principal">اسم مدير المدرسة</label>
-        <input id="principal" type="text" placeholder="أدخل اسم مدير المدرسة" oninput="sync('principal',this.value)">
+        <input id="principal" type="text" placeholder="أدخل اسم مدير المدرسة" oninput="sync('principal',this.value)" value="سعود بن عبدالله الحربي">
       </div>
     </div>
 
@@ -792,25 +851,36 @@ function clearText(textareaId, targetId, counterId) {
   textarea.dispatchEvent(event);
 }
 
+// دالة المزامنة مع إصلاح جميع الحقول
 function sync(id,val){
-  document.getElementById(id).textContent = val;
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = val;
+  }
   
   // تحديث حقل البند التربوي في التقرير
   if (id === 'title') {
     const educationItem = document.getElementById('education-item');
     if (educationItem.value) {
-      document.getElementById('axis').textContent = educationItem.value;
+      const axisElement = document.getElementById('axis');
+      if (axisElement) {
+        axisElement.textContent = educationItem.value;
+      }
     }
   }
 }
 
+// تحديث قائمة عناوين التقارير
 function updateReportTitles() {
   const educationItem = document.getElementById('education-item');
   const reportTitleSelect = document.getElementById('report-title-select');
   const selectedCategory = educationItem.value;
   
   // تحديث حقل البند التربوي في التقرير
-  document.getElementById('axis').textContent = selectedCategory;
+  const axisElement = document.getElementById('axis');
+  if (axisElement) {
+    axisElement.textContent = selectedCategory;
+  }
   
   // مسح القائمة الحالية
   reportTitleSelect.innerHTML = '<option value="">اختر عنوان التقرير</option>';
@@ -826,6 +896,7 @@ function updateReportTitles() {
   }
 }
 
+// دالة عد الكلمات مع إصلاح
 function limitWords(el, target, counterId){
   let text = el.value.trim();
   let words = text === '' ? [] : text.replace(/\s+/g, ' ').split(' ').filter(w => w);
@@ -838,12 +909,18 @@ function limitWords(el, target, counterId){
   }
   
   const counter = document.getElementById(counterId);
-  counter.textContent = `${words.length} / 15 كلمة`;
-  counter.classList.toggle('limit', words.length === 15);
+  if (counter) {
+    counter.textContent = `${words.length} / 15 كلمة`;
+    counter.classList.toggle('limit', words.length === 15);
+  }
   
-  document.getElementById(target).textContent = text;
+  const targetElement = document.getElementById(target);
+  if (targetElement) {
+    targetElement.textContent = text;
+  }
 }
 
+// إعداد الصور
 const imagesInput = document.getElementById('imagesInput');
 const imagesContainer = document.getElementById('imagesContainer');
 const fileInfo = document.getElementById('fileInfo');
@@ -880,7 +957,7 @@ imagesInput.addEventListener('change', e => {
   });
 });
 
-// دالة إعداد الطباعة (بدون رسالة تأكيد)
+// دالة إعداد الطباعة
 function preparePrint() {
   // التحقق من الحقول المطلوبة
   const requiredFields = ['education-department', 'school', 'education-item', 'report-title-select', 'date'];
@@ -904,16 +981,29 @@ function preparePrint() {
   window.print();
 }
 
+// دالة إعادة تعيين النموذج
 function resetForm(){
   if(!confirm('هل أنت متأكد من رغبتك في مسح جميع الخانات؟')) return;
   
   // مسح جميع حقول الإدخال
   document.querySelectorAll('input[type="text"], input[type="file"], textarea, select').forEach(e => {
-    e.value = '';
+    if (e.id === 'date') {
+      e.value = '١٤٤٦/٠٧/٢٠'; // إعادة تعيين التاريخ الهجري
+    } else if (e.id === 'target') {
+      e.value = 'طلاب الصف السادس'; // قيمة افتراضية للمستهدفين
+    } else if (e.id === 'count') {
+      e.value = '٣٠'; // قيمة افتراضية للعدد
+    } else if (e.id === 'teacher') {
+      e.value = 'أحمد بن محمد السعيد'; // قيمة افتراضية لاسم المعلم
+    } else if (e.id === 'principal') {
+      e.value = 'سعود بن عبدالله الحربي'; // قيمة افتراضية لاسم المدير
+    } else {
+      e.value = '';
+    }
   });
   
-  // مسح المحتوى النصي
-  document.querySelectorAll('[id]').forEach(e => {
+  // مسح المحتوى النصي في قسم التقرير
+  document.querySelectorAll('.report [id]').forEach(e => {
     if (!['c1', 'c2', 'c3', 'c4'].includes(e.id)) {
       e.textContent = '';
     }
@@ -928,6 +1018,7 @@ function resetForm(){
     }
   });
   
+  // إعادة تعيين الصور
   imagesContainer.innerHTML = '';
   fileInfo.textContent = 'لم يتم اختيار أي صور';
   fileInfo.style.color = '#6a8a85';
@@ -935,9 +1026,26 @@ function resetForm(){
   // إعادة تعيين قائمة عناوين التقارير
   document.getElementById('report-title-select').innerHTML = '<option value="">اختر عنوان التقرير بعد اختيار البند التربوي</option>';
   
+  // مزامنة القيم الافتراضية
+  sync('date', document.getElementById('date').value);
+  sync('target', document.getElementById('target').value);
+  sync('count', document.getElementById('count').value);
+  sync('teacher', document.getElementById('teacher').value);
+  sync('principal', document.getElementById('principal').value);
+  
   // إعادة التركيز على أول حقل
   document.getElementById('education-department').focus();
 }
+
+// تهيئة القيم الافتراضية عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+  // تعيين القيم الافتراضية
+  sync('date', document.getElementById('date').value);
+  sync('target', document.getElementById('target').value);
+  sync('count', document.getElementById('count').value);
+  sync('teacher', document.getElementById('teacher').value);
+  sync('principal', document.getElementById('principal').value);
+});
 </script>
 
 </body>
