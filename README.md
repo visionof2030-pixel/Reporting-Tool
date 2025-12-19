@@ -35,31 +35,45 @@ body{
   line-height: 1.6;
 }
 
-/* ===== الأداة المحسنة ===== */
+/* ===== الهيدر الجديد المصغر ===== */
 .tool-container {
   max-width: 1000px;
   margin: 0 auto 40px;
 }
 
 .tool-header {
-  text-align: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 10px;
   box-shadow: var(--shadow);
 }
 
-.tool-header h1 {
-  margin: 0 0 10px;
-  font-size: 28px;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.tool-header p {
-  margin: 0;
-  opacity: 0.9;
-  font-size: 16px;
+.header-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.header-right {
+  font-size: 14px;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 .tool{
@@ -90,6 +104,7 @@ body{
 
 .form-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .form-group label{
@@ -134,6 +149,46 @@ body{
   background-position: left 15px center;
   background-size: 12px;
   padding-right: 15px;
+}
+
+/* ===== أزرار النصوص الافتراضية ===== */
+.default-text-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.default-btn {
+  padding: 6px 12px;
+  background: var(--light-gray);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-color);
+}
+
+.default-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.clear-btn {
+  padding: 6px 12px;
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  color: #c62828;
+}
+
+.clear-btn:hover {
+  background: #ffcdd2;
 }
 
 /* ===== عداد الكلمات ===== */
@@ -397,9 +452,13 @@ body{
 </div>
 
 <div class="tool-container">
+  <!-- الهيدر الجديد المصغر -->
   <div class="tool-header">
-    <h1>أداة إعداد التقارير المدرسية</h1>
-    <p>أداة متكاملة لإنشاء تقارير احترافية بسهولة وسرعة</p>
+    <div class="header-left">
+      <img src="https://i.ibb.co/2037zjqy/IMG-2102.jpg" alt="شعار وزارة التعليم" class="header-logo">
+      <div class="header-title">وزارة التعليم</div>
+    </div>
+    <div class="header-right">أداة إعداد التقارير المدرسية</div>
   </div>
 
   <div class="tool">
@@ -485,36 +544,64 @@ body{
       </div>
     </div>
 
+    <!-- وصف مختصر مع نصوص افتراضية -->
     <div class="form-group">
       <label for="desc1Input">وصف مختصر (15 كلمة)</label>
       <textarea id="desc1Input" placeholder="أدخل وصف مختصر للتقرير (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc1','c1')"></textarea>
+      <div class="default-text-buttons">
+        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[0])">لصق النص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[1])">لصق النص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[2])">لصق النص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc1Input', 'desc1', 'c1')">مسح النص</button>
+      </div>
       <div class="counter-container">
         <div class="counter" id="c1">0 / 15 كلمة</div>
         <div class="counter">الكلمات المتبقية: <span id="c1-remaining">15</span></div>
       </div>
     </div>
 
+    <!-- إجراءات التنفيذ مع نصوص افتراضية -->
     <div class="form-group">
       <label for="desc2Input">إجراءات التنفيذ (15 كلمة)</label>
       <textarea id="desc2Input" placeholder="أدخل إجراءات التنفيذ (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc2','c2')"></textarea>
+      <div class="default-text-buttons">
+        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[0])">لصق النص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[1])">لصق النص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[2])">لصق النص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc2Input', 'desc2', 'c2')">مسح النص</button>
+      </div>
       <div class="counter-container">
         <div class="counter" id="c2">0 / 15 كلمة</div>
         <div class="counter">الكلمات المتبقية: <span id="c2-remaining">15</span></div>
       </div>
     </div>
 
+    <!-- النتائج مع نصوص افتراضية -->
     <div class="form-group">
       <label for="desc3Input">النتائج (15 كلمة)</label>
       <textarea id="desc3Input" placeholder="أدخل النتائج المتحققة (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc3','c3')"></textarea>
+      <div class="default-text-buttons">
+        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[0])">لصق النص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[1])">لصق النص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[2])">لصق النص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc3Input', 'desc3', 'c3')">مسح النص</button>
+      </div>
       <div class="counter-container">
         <div class="counter" id="c3">0 / 15 كلمة</div>
         <div class="counter">الكلمات المتبقية: <span id="c3-remaining">15</span></div>
       </div>
     </div>
 
+    <!-- التوصيات مع نصوص افتراضية -->
     <div class="form-group">
       <label for="desc4Input">التوصيات (15 كلمة)</label>
       <textarea id="desc4Input" placeholder="أدخل التوصيات المقترحة (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc4','c4')"></textarea>
+      <div class="default-text-buttons">
+        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[0])">لصق النص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[1])">لصق النص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[2])">لصق النص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc4Input', 'desc4', 'c4')">مسح النص</button>
+      </div>
       <div class="counter-container">
         <div class="counter" id="c4">0 / 15 كلمة</div>
         <div class="counter">الكلمات المتبقية: <span id="c4-remaining">15</span></div>
@@ -687,6 +774,87 @@ const reportCategories = {
     "تقرير إجراءات السلامة المدرسية"
   ]
 };
+
+// النصوص الافتراضية لكل خانة (3 نصوص لكل خانة)
+const defaultTexts = {
+  desc1: [
+    "تم تنفيذ نشاط إثرائي لتحسين مستوى الطلاب في مادة الرياضيات. تضمن النشاط تمارين تفاعلية ومسابقات جماعية.",
+    "نفذت حصة تطبيقية لتعزيز مهارات التفكير الناقد لدى الطلاب. ركزت على حل المشكلات والتحليل المنطقي.",
+    "تم تنظيم ورشة عمل لتعزيز التعلم النشط. شارك فيها طلاب الصفوف العليا في أنشطة عملية وتجريبية."
+  ],
+  desc2: [
+    "تقسيم الطلاب لمجموعات عمل صغيرة. توزيع المهام حسب القدرات. استخدام وسائل تعليمية متنوعة. متابعة الأداء بشكل فردي.",
+    "تحضير الدروس مسبقاً مع الوسائل المناسبة. تنظيم بيئة صفية محفزة. تطبيق استراتيجيات تعليمية حديثة. تقييم فوري للإنجاز.",
+    "تحديد الأهداف التعليمية بوضوح. اختيار الأنشطة المناسبة للمستويات. توفير المواد المساعدة. تنفيذ التغذية الراجعة المستمرة."
+  ],
+  desc3: [
+    "تحسن ملحوظ في مستوى التحصيل الدراسي. ارتفاع معدلات المشاركة الصفية. زيادة تفاعل الطلاب مع الأنشطة.",
+    "تحقيق الأهداف التعليمية المخطط لها. تفاعل إيجابي من الطلاب. تحسن في نتائج التقييمات المستمرة.",
+    "زيادة دافعية الطلاب للتعلم. تحسن في المهارات الأساسية. نجاح في تحقيق نواتج التعلم المستهدفة."
+  ],
+  desc4: [
+    "الاستمرار في تطبيق الأنشطة الإثرائية. تعميم التجربة على بقية الفصول. تنظيم دورات تدريبية للمعلمين.",
+    "تطوير المزيد من الوسائل التعليمية. توسيع نطاق الأنشطة اللاصفية. تعزيز الشراكة مع أولياء الأمور.",
+    "توثيق الممارسات الناجحة. الاستفادة من التغذية الراجعة. التخطيط لأنشطة مستقبلية مماثلة."
+  ]
+};
+
+// دالة لصق النص الافتراضي
+function pasteDefaultText(textareaId, text) {
+  const textarea = document.getElementById(textareaId);
+  if (!textarea) return;
+  
+  // مسح النص الحالي
+  textarea.value = text;
+  
+  // تشغيل حدث oninput يدوياً لتحديث العداد
+  const event = new Event('input', { bubbles: true });
+  textarea.dispatchEvent(event);
+  
+  // إظهار رسالة تأكيد
+  showMessage('تم لصق النص الافتراضي');
+}
+
+// دالة مسح النص
+function clearText(textareaId, targetId, counterId) {
+  const textarea = document.getElementById(textareaId);
+  if (!textarea) return;
+  
+  // مسح النص
+  textarea.value = '';
+  
+  // تشغيل حدث oninput يدوياً
+  const event = new Event('input', { bubbles: true });
+  textarea.dispatchEvent(event);
+  
+  // إظهار رسالة تأكيد
+  showMessage('تم مسح النص');
+}
+
+// دالة إظهار رسالة
+function showMessage(message) {
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  messageDiv.style.cssText = `
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    z-index: 10000;
+    font-size: 14px;
+    box-shadow: var(--shadow);
+  `;
+  
+  document.body.appendChild(messageDiv);
+  
+  setTimeout(() => {
+    document.body.removeChild(messageDiv);
+  }, 2000);
+}
 
 function sync(id,val){
   document.getElementById(id).textContent = val;
