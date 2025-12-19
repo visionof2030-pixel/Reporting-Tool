@@ -405,25 +405,25 @@ body{
   <div class="tool">
     <div class="form-grid">
       <div class="form-group">
-        <label for="edu">إدارة التعليم</label>
-        <select id="edu" oninput="sync('edu',this.value)">
+        <label for="education-department">إدارة التعليم</label>
+        <select id="education-department" oninput="sync('edu', this.options[this.selectedIndex].text)">
           <option value="">اختر إدارة التعليم</option>
-          <option value="الإدارة العامة للتعليم بمنطقة مكة المكرمة">الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
-          <option value="الإدارة العامة للتعليم بمنطقة الرياض">الإدارة العامة للتعليم بمنطقة الرياض</option>
-          <option value="الإدارة العامة للتعليم بمنطقة المدينة المنورة">الإدارة العامة للتعليم بمنطقة المدينة المنورة</option>
-          <option value="الإدارة العامة للتعليم بالمنطقة الشرقية">الإدارة العامة للتعليم بالمنطقة الشرقية</option>
-          <option value="الإدارة العامة للتعليم بمنطقة القصيم">الإدارة العامة للتعليم بمنطقة القصيم</option>
-          <option value="الإدارة العامة للتعليم بمنطقة عسير">الإدارة العامة للتعليم بمنطقة عسير</option>
-          <option value="الإدارة العامة للتعليم بمنطقة تبوك">الإدارة العامة للتعليم بمنطقة تبوك</option>
-          <option value="الإدارة العامة للتعليم بمنطقة حائل">الإدارة العامة للتعليم بمنطقة حائل</option>
-          <option value="الإدارة العامة للتعليم بمنطقة الحدود الشمالية">الإدارة العامة للتعليم بمنطقة الحدود الشمالية</option>
-          <option value="الإدارة العامة للتعليم بمنطقة جازان">الإدارة العامة للتعليم بمنطقة جازان</option>
-          <option value="الإدارة العامة للتعليم بمنطقة نجران">الإدارة العامة للتعليم بمنطقة نجران</option>
-          <option value="الإدارة العامة للتعليم بمنطقة الباحة">الإدارة العامة للتعليم بمنطقة الباحة</option>
-          <option value="الإدارة العامة للتعليم بمنطقة الجوف">الإدارة العامة للتعليم بمنطقة الجوف</option>
-          <option value="الإدارة العامة للتعليم بمحافظة الأحساء">الإدارة العامة للتعليم بمحافظة الأحساء</option>
-          <option value="الإدارة العامة للتعليم بمحافظة الطائف">الإدارة العامة للتعليم بمحافظة الطائف</option>
-          <option value="الإدارة العامة للتعليم بمحافظة جدة">الإدارة العامة للتعليم بمحافظة جدة</option>
+          <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
+          <option>الإدارة العامة للتعليم بمنطقة الرياض</option>
+          <option>الإدارة العامة للتعليم بمنطقة المدينة المنورة</option>
+          <option>الإدارة العامة للتعليم بالمنطقة الشرقية</option>
+          <option>الإدارة العامة للتعليم بمنطقة القصيم</option>
+          <option>الإدارة العامة للتعليم بمنطقة عسير</option>
+          <option>الإدارة العامة للتعليم بمنطقة تبوك</option>
+          <option>الإدارة العامة للتعليم بمنطقة حائل</option>
+          <option>الإدارة العامة للتعليم بمنطقة الحدود الشمالية</option>
+          <option>الإدارة العامة للتعليم بمنطقة جازان</option>
+          <option>الإدارة العامة للتعليم بمنطقة نجران</option>
+          <option>الإدارة العامة للتعليم بمنطقة الباحة</option>
+          <option>الإدارة العامة للتعليم بمنطقة الجوف</option>
+          <option>الإدارة العامة للتعليم بمحافظة الأحساء</option>
+          <option>الإدارة العامة للتعليم بمحافظة الطائف</option>
+          <option>الإدارة العامة للتعليم بمحافظة جدة</option>
         </select>
       </div>
 
@@ -433,13 +433,30 @@ body{
       </div>
 
       <div class="form-group">
-        <label for="axis">البند التربوي</label>
-        <input id="axis" type="text" placeholder="أدخل البند التربوي" oninput="sync('axis',this.value)">
+        <label for="education-item">البند التربوي</label>
+        <select id="education-item" onchange="updateReportTitles()">
+          <option value="">اختر البند التربوي</option>
+          <option value="تحسين نواتج التعلم والتحصيل الدراسي">تحسين نواتج التعلم والتحصيل الدراسي</option>
+          <option value="الدعم العلاجي والتدخلات التعليمية">الدعم العلاجي والتدخلات التعليمية</option>
+          <option value="التدريس والتعلم داخل الصف">التدريس والتعلم داخل الصف</option>
+          <option value="التخطيط والتنظيم التعليمي">التخطيط والتنظيم التعليمي</option>
+          <option value="الأنشطة المدرسية واللاصفية">الأنشطة المدرسية واللاصفية</option>
+          <option value="التقويم والمتابعة والتوثيق">التقويم والمتابعة والتوثيق</option>
+          <option value="التواصل والشراكة مع الأسرة">التواصل والشراكة مع الأسرة</option>
+          <option value="التطوير المهني وبناء القدرات">التطوير المهني وبناء القدرات</option>
+          <option value="التميز والجودة">التميز والجودة</option>
+          <option value="التحول الرقمي والابتكار">التحول الرقمي والابتكار</option>
+          <option value="السلوك والإرشاد التربوي">السلوك والإرشاد التربوي</option>
+          <option value="المبادرات والشراكات المجتمعية">المبادرات والشراكات المجتمعية</option>
+          <option value="السلامة والصحة المدرسية">السلامة والصحة المدرسية</option>
+        </select>
       </div>
 
       <div class="form-group">
-        <label for="title">عنوان التقرير</label>
-        <input id="title" type="text" placeholder="أدخل عنوان التقرير" oninput="sync('title',this.value)">
+        <label for="report-title-select">عنوان التقرير</label>
+        <select id="report-title-select" onchange="sync('title', this.value)">
+          <option value="">اختر عنوان التقرير بعد اختيار البند التربوي</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -469,7 +486,7 @@ body{
     </div>
 
     <div class="form-group">
-      <label>وصف مختصر (15 كلمة)</label>
+      <label for="desc1Input">وصف مختصر (15 كلمة)</label>
       <textarea id="desc1Input" placeholder="أدخل وصف مختصر للتقرير (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc1','c1')"></textarea>
       <div class="counter-container">
         <div class="counter" id="c1">0 / 15 كلمة</div>
@@ -478,7 +495,7 @@ body{
     </div>
 
     <div class="form-group">
-      <label>إجراءات التنفيذ (15 كلمة)</label>
+      <label for="desc2Input">إجراءات التنفيذ (15 كلمة)</label>
       <textarea id="desc2Input" placeholder="أدخل إجراءات التنفيذ (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc2','c2')"></textarea>
       <div class="counter-container">
         <div class="counter" id="c2">0 / 15 كلمة</div>
@@ -487,7 +504,7 @@ body{
     </div>
 
     <div class="form-group">
-      <label>النتائج (15 كلمة)</label>
+      <label for="desc3Input">النتائج (15 كلمة)</label>
       <textarea id="desc3Input" placeholder="أدخل النتائج المتحققة (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc3','c3')"></textarea>
       <div class="counter-container">
         <div class="counter" id="c3">0 / 15 كلمة</div>
@@ -496,7 +513,7 @@ body{
     </div>
 
     <div class="form-group">
-      <label>التوصيات (15 كلمة)</label>
+      <label for="desc4Input">التوصيات (15 كلمة)</label>
       <textarea id="desc4Input" placeholder="أدخل التوصيات المقترحة (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc4','c4')"></textarea>
       <div class="counter-container">
         <div class="counter" id="c4">0 / 15 كلمة</div>
@@ -575,8 +592,135 @@ body{
 </div>
 
 <script>
+// بيانات التقارير التربوية
+const reportCategories = {
+  "تحسين نواتج التعلم والتحصيل الدراسي": [
+    "تقرير نشاط إثرائي",
+    "تقرير تنفيذ اختبار تحسن",
+    "تقرير تحليل النتائج",
+    "تقرير مقارنة السلاسل الزمنية",
+    "تقرير تصنيف الطلاب",
+    "تقرير تحفيز الطلاب",
+    "تقرير دراسة حالة",
+    "تقرير البحث الإجرائي",
+    "تقرير نقل أثر التدريب",
+    "تقرير التدريب على الاختبارات المعيارية"
+  ],
+  "الدعم العلاجي والتدخلات التعليمية": [
+    "تقرير خطة علاجية",
+    "تقرير سجل الخطط العلاجية",
+    "تقرير رعاية الطلاب المتأخرين دراسيًا",
+    "تقرير كشف المتابعة",
+    "تقرير إشعار ولي الأمر عن مستوى ابنه"
+  ],
+  "التدريس والتعلم داخل الصف": [
+    "تقرير أنشطة صفية",
+    "تقرير درس تم تنفيذه",
+    "تقرير تنفيذ درس تطبيقي",
+    "تقرير تعليم تعاوني بين الطلاب",
+    "تقرير الفصول المقلوبة",
+    "تقرير توزيع وقت الحصة",
+    "تقرير تطوير البيئة الصفية",
+    "تقرير حصة النشاط"
+  ],
+  "التخطيط والتنظيم التعليمي": [
+    "تقرير خطة أسبوعية",
+    "تقرير تفعيل الخطة الأسبوعية",
+    "تقرير توزيع المنهج",
+    "تقرير تفعيل حصص النشاط"
+  ],
+  "الأنشطة المدرسية واللاصفية": [
+    "تقرير تنفيذ إذاعة مدرسية",
+    "تقرير الاحتفال باليوم الوطني",
+    "تقرير مبادرة تطوعية",
+    "تقرير المعلم الصغير"
+  ],
+  "التقويم والمتابعة والتوثيق": [
+    "تقرير سجل الدرجات الإلكتروني",
+    "تقرير سجل التغذية الراجعة من الطلاب",
+    "تقرير سجل رعاية الموهوبين",
+    "تقرير سجل التواصل مع أولياء الأمور",
+    "تقارير الجرد (للمختبرات وغرف المصادر)"
+  ],
+  "التواصل والشراكة مع الأسرة": [
+    "تقرير التواصل مع ولي الأمر",
+    "تقرير حضور اجتماع أولياء الأمور",
+    "تقرير إشعار ولي الأمر",
+    "تقرير سجل التواصل مع أولياء الأمور"
+  ],
+  "التطوير المهني وبناء القدرات": [
+    "تقرير حضور دورات وورش تدريبية",
+    "تقرير الورش التدريبية التي قدمتها",
+    "تقرير تبادل الزيارات",
+    "تقرير مجتمعات التعلم",
+    "تقرير المجتمعات المهنية"
+  ],
+  "التميز والجودة": [
+    "تقرير عضوية لجنة التميز والجودة",
+    "تقرير متابعة مؤشرات الأداء",
+    "تقرير توثيق الممارسات المتميزة",
+    "تقرير متابعة خطط التحسين",
+    "تقرير قياس رضا المستفيدين",
+    "تقرير مبادرات التميز"
+  ],
+  "التحول الرقمي والابتكار": [
+    "تقرير تفعيل المنصات التعليمية",
+    "تقرير المحتوى الرقمي المنتج",
+    "تقرير الاختبارات الذكية",
+    "تقرير توظيف الذكاء الاصطناعي",
+    "تقرير الوسائل التعليمية المبتكرة"
+  ],
+  "السلوك والإرشاد التربوي": [
+    "تقرير تعزيز السلوك الإيجابي",
+    "تقرير حل مشكلة تربوية",
+    "تقرير متابعة حالات سلوكية",
+    "تقرير جلسات إرشادية"
+  ],
+  "المبادرات والشراكات المجتمعية": [
+    "تقرير مبادرة تعليمية",
+    "تقرير مبادرة تطوعية",
+    "تقرير شراكة مجتمعية تعليمية"
+  ],
+  "السلامة والصحة المدرسية": [
+    "تقرير تنفيذ فرضية إخلاء",
+    "تقرير التوعية الصحية",
+    "تقرير إجراءات السلامة المدرسية"
+  ]
+};
+
 function sync(id,val){
   document.getElementById(id).textContent = val;
+  
+  // تحديث حقل البند التربوي في التقرير
+  if (id === 'title') {
+    // تحديث البند التربوي أيضاً عند اختيار عنوان التقرير
+    const educationItem = document.getElementById('education-item');
+    if (educationItem.value) {
+      document.getElementById('axis').textContent = educationItem.value;
+    }
+  }
+}
+
+function updateReportTitles() {
+  const educationItem = document.getElementById('education-item');
+  const reportTitleSelect = document.getElementById('report-title-select');
+  const selectedCategory = educationItem.value;
+  
+  // تحديث حقل البند التربوي في التقرير
+  document.getElementById('axis').textContent = selectedCategory;
+  
+  // مسح القائمة الحالية
+  reportTitleSelect.innerHTML = '<option value="">اختر عنوان التقرير</option>';
+  
+  // إضافة الخيارات المناسبة
+  if (selectedCategory && reportCategories[selectedCategory]) {
+    reportCategories[selectedCategory].forEach(report => {
+      const option = document.createElement('option');
+      option.value = report;
+      option.textContent = report;
+      reportTitleSelect.appendChild(option);
+    });
+  }
 }
 
 function limitWords(el, target, counterId){
@@ -645,18 +789,15 @@ imagesInput.addEventListener('change', e => {
 // دالة إعداد الطباعة مع رسالة تأكيد
 function preparePrint() {
   // التحقق من الحقول المطلوبة
-  const requiredFields = ['edu', 'school', 'axis', 'title', 'date'];
+  const requiredFields = ['education-department', 'school', 'education-item', 'report-title-select', 'date'];
   let missingFields = [];
   
   requiredFields.forEach(fieldId => {
     const field = document.getElementById(fieldId);
-    if (!field.value && fieldId !== 'edu') {
-      missingFields.push(field.previousElementSibling.textContent);
-    }
+    const label = field.previousElementSibling ? field.previousElementSibling.textContent : fieldId;
     
-    // معالجة خاصية للقائمة المنسدلة
-    if (fieldId === 'edu' && field.tagName === 'SELECT' && !field.value) {
-      missingFields.push('إدارة التعليم');
+    if (!field.value) {
+      missingFields.push(label);
     }
   });
   
@@ -718,8 +859,11 @@ function resetForm(){
   fileInfo.textContent = 'لم يتم اختيار أي صور';
   fileInfo.style.color = '#6a8a85';
   
+  // إعادة تعيين قائمة عناوين التقارير
+  document.getElementById('report-title-select').innerHTML = '<option value="">اختر عنوان التقرير بعد اختيار البند التربوي</option>';
+  
   // إعادة التركيز على أول حقل
-  document.getElementById('edu').focus();
+  document.getElementById('education-department').focus();
 }
 </script>
 
