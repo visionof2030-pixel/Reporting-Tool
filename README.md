@@ -20,80 +20,76 @@
   --border-color: #b8d4d0;
   --error-color: #e74c3c;
   --success-color: #27ae60;
-  --shadow: 0 4px 12px rgba(10, 59, 64, 0.08);
-  --shadow-hover: 0 6px 16px rgba(10, 59, 64, 0.12);
-  --radius: 12px;
+  --shadow: 0 2px 8px rgba(10, 59, 64, 0.08);
+  --shadow-hover: 0 4px 12px rgba(10, 59, 64, 0.12);
+  --radius: 8px;
   --transition: all 0.3s ease;
 }
 
 body{
   font-family: 'KufamLocal', 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #f2f7f6 0%, #e8f1f0 100%);
+  background: #f8fbfa;
   margin: 0;
-  padding: 20px;
+  padding: 15px;
   color: var(--text-color);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* ===== الهيدر الجديد المصغر ===== */
 .tool-container {
   max-width: 1000px;
-  margin: 0 auto 40px;
+  margin: 0 auto 20px;
 }
 
 .tool-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 10px 15px;
+  margin-bottom: 15px;
+  padding: 8px 12px;
   background: white;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: var(--shadow);
+  border-bottom: 3px solid var(--primary-color);
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .header-logo {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   object-fit: contain;
 }
 
 .header-title {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--primary-color);
 }
 
 .header-right {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-color);
   opacity: 0.8;
 }
 
 .tool{
   background: white;
-  padding: 30px;
+  padding: 20px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: var(--transition);
-}
-
-.tool:hover {
-  box-shadow: var(--shadow-hover);
 }
 
 /* ===== تحسين الحقول ===== */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 25px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
@@ -103,27 +99,27 @@ body{
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   position: relative;
 }
 
 .form-group label{
   display: block;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: var(--primary-color);
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 14px;
-  border: 2px solid var(--border-color);
-  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 14px;
   background-color: white;
   transition: var(--transition);
   box-sizing: border-box;
@@ -134,37 +130,38 @@ body{
 .form-group select:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(65, 191, 179, 0.1);
+  box-shadow: 0 0 0 2px rgba(65, 191, 179, 0.1);
 }
 
 .form-group textarea{
   resize: vertical;
-  min-height: 100px;
+  min-height: 80px;
+  font-size: 13px;
 }
 
 .form-group select {
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%230a3b40' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230a3b40' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: left 15px center;
-  background-size: 12px;
-  padding-right: 15px;
+  background-position: left 12px center;
+  background-size: 10px;
+  padding-right: 12px;
 }
 
 /* ===== أزرار النصوص الافتراضية ===== */
 .default-text-buttons {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 6px;
+  margin-top: 6px;
   flex-wrap: wrap;
 }
 
 .default-btn {
-  padding: 6px 12px;
+  padding: 5px 10px;
   background: var(--light-gray);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 4px;
+  font-size: 11px;
   cursor: pointer;
   transition: var(--transition);
   color: var(--text-color);
@@ -177,11 +174,11 @@ body{
 }
 
 .clear-btn {
-  padding: 6px 12px;
+  padding: 5px 10px;
   background: #ffebee;
   border: 1px solid #ffcdd2;
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 4px;
+  font-size: 11px;
   cursor: pointer;
   transition: var(--transition);
   color: #c62828;
@@ -195,11 +192,11 @@ body{
 .counter-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .counter{
-  font-size: 13px;
+  font-size: 11px;
   color: #6a8a85;
   font-weight: 500;
 }
@@ -212,8 +209,8 @@ body{
 /* ===== تحسين الأزرار ===== */
 .buttons-container {
   display: flex;
-  gap: 15px;
-  margin-top: 30px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
@@ -224,10 +221,10 @@ body{
 
 .btn {
   flex: 1;
-  padding: 16px 24px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: var(--transition);
@@ -235,37 +232,37 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
   color: white;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-hover);
+  background: var(--secondary-color);
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
-  background: linear-gradient(90deg, #7f8c8d, #95a5a6);
+  background: #7f8c8d;
   color: white;
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(90deg, #6c7b7d, #7f8c8d);
-  transform: translateY(-3px);
+  background: #6c7b7d;
+  transform: translateY(-2px);
 }
 
 .btn-icon {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* ===== تحسين تحميل الصور ===== */
 .file-upload {
   position: relative;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .file-upload input[type="file"] {
@@ -279,10 +276,10 @@ body{
 
 .file-upload label {
   display: block;
-  padding: 14px;
+  padding: 10px;
   background-color: var(--light-gray);
-  border: 2px dashed var(--border-color);
-  border-radius: 10px;
+  border: 1px dashed var(--border-color);
+  border-radius: 6px;
   text-align: center;
   color: var(--primary-color);
   font-weight: 600;
@@ -290,6 +287,7 @@ body{
   transition: var(--transition);
   z-index: 1;
   position: relative;
+  font-size: 13px;
 }
 
 .file-upload label:hover {
@@ -298,33 +296,10 @@ body{
 }
 
 .file-upload .file-info {
-  margin-top: 8px;
-  font-size: 13px;
+  margin-top: 6px;
+  font-size: 11px;
   color: #6a8a85;
   text-align: center;
-}
-
-/* ===== رسالة تأكيد ===== */
-.confirmation {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--success-color);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  z-index: 1000;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s, transform 0.3s;
-  display: none;
-}
-
-.confirmation.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* ===== التقرير (لطباعة PDF - غير متغير) ===== */
@@ -447,10 +422,6 @@ body{
 
 <body>
 
-<div class="confirmation" id="confirmationMessage">
-  ✓ تم إنشاء التقرير بنجاح، جاهز للطباعة
-</div>
-
 <div class="tool-container">
   <!-- الهيدر الجديد المصغر -->
   <div class="tool-header">
@@ -549,14 +520,13 @@ body{
       <label for="desc1Input">وصف مختصر (15 كلمة)</label>
       <textarea id="desc1Input" placeholder="أدخل وصف مختصر للتقرير (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc1','c1')"></textarea>
       <div class="default-text-buttons">
-        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[0])">لصق النص ١</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[1])">لصق النص ٢</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[2])">لصق النص ٣</button>
-        <button class="clear-btn" onclick="clearText('desc1Input', 'desc1', 'c1')">مسح النص</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[0])">نص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[1])">نص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc1Input', defaultTexts.desc1[2])">نص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc1Input', 'desc1', 'c1')">مسح</button>
       </div>
       <div class="counter-container">
         <div class="counter" id="c1">0 / 15 كلمة</div>
-        <div class="counter">الكلمات المتبقية: <span id="c1-remaining">15</span></div>
       </div>
     </div>
 
@@ -565,14 +535,13 @@ body{
       <label for="desc2Input">إجراءات التنفيذ (15 كلمة)</label>
       <textarea id="desc2Input" placeholder="أدخل إجراءات التنفيذ (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc2','c2')"></textarea>
       <div class="default-text-buttons">
-        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[0])">لصق النص ١</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[1])">لصق النص ٢</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[2])">لصق النص ٣</button>
-        <button class="clear-btn" onclick="clearText('desc2Input', 'desc2', 'c2')">مسح النص</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[0])">نص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[1])">نص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc2Input', defaultTexts.desc2[2])">نص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc2Input', 'desc2', 'c2')">مسح</button>
       </div>
       <div class="counter-container">
         <div class="counter" id="c2">0 / 15 كلمة</div>
-        <div class="counter">الكلمات المتبقية: <span id="c2-remaining">15</span></div>
       </div>
     </div>
 
@@ -581,14 +550,13 @@ body{
       <label for="desc3Input">النتائج (15 كلمة)</label>
       <textarea id="desc3Input" placeholder="أدخل النتائج المتحققة (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc3','c3')"></textarea>
       <div class="default-text-buttons">
-        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[0])">لصق النص ١</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[1])">لصق النص ٢</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[2])">لصق النص ٣</button>
-        <button class="clear-btn" onclick="clearText('desc3Input', 'desc3', 'c3')">مسح النص</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[0])">نص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[1])">نص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc3Input', defaultTexts.desc3[2])">نص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc3Input', 'desc3', 'c3')">مسح</button>
       </div>
       <div class="counter-container">
         <div class="counter" id="c3">0 / 15 كلمة</div>
-        <div class="counter">الكلمات المتبقية: <span id="c3-remaining">15</span></div>
       </div>
     </div>
 
@@ -597,14 +565,13 @@ body{
       <label for="desc4Input">التوصيات (15 كلمة)</label>
       <textarea id="desc4Input" placeholder="أدخل التوصيات المقترحة (15 كلمة كحد أقصى)" oninput="limitWords(this,'desc4','c4')"></textarea>
       <div class="default-text-buttons">
-        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[0])">لصق النص ١</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[1])">لصق النص ٢</button>
-        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[2])">لصق النص ٣</button>
-        <button class="clear-btn" onclick="clearText('desc4Input', 'desc4', 'c4')">مسح النص</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[0])">نص ١</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[1])">نص ٢</button>
+        <button class="default-btn" onclick="pasteDefaultText('desc4Input', defaultTexts.desc4[2])">نص ٣</button>
+        <button class="clear-btn" onclick="clearText('desc4Input', 'desc4', 'c4')">مسح</button>
       </div>
       <div class="counter-container">
         <div class="counter" id="c4">0 / 15 كلمة</div>
-        <div class="counter">الكلمات المتبقية: <span id="c4-remaining">15</span></div>
       </div>
     </div>
 
@@ -614,7 +581,7 @@ body{
         <input type="file" id="imagesInput" multiple accept="image/*">
         <label for="imagesInput">
           <span class="btn-icon">📷</span>
-          <span>انقر لاختيار الصور أو اسحبها هنا</span>
+          <span>انقر لاختيار الصور (صورتان كحد أقصى)</span>
         </label>
         <div class="file-info" id="fileInfo">لم يتم اختيار أي صور</div>
       </div>
@@ -623,11 +590,11 @@ body{
     <div class="buttons-container">
       <button class="btn btn-primary" onclick="preparePrint()">
         <span class="btn-icon">📄</span>
-        <span>تصدير تقرير PDF</span>
+        <span>تصدير PDF</span>
       </button>
       <button class="btn btn-secondary" onclick="resetForm()">
         <span class="btn-icon">🔄</span>
-        <span>مسح جميع الخانات</span>
+        <span>مسح الكل</span>
       </button>
     </div>
   </div>
@@ -775,27 +742,27 @@ const reportCategories = {
   ]
 };
 
-// النصوص الافتراضية لكل خانة (3 نصوص لكل خانة)
+// النصوص الافتراضية المحسنة (بدون ذكر مواد دراسية)
 const defaultTexts = {
   desc1: [
-    "تم تنفيذ نشاط إثرائي لتحسين مستوى الطلاب في مادة الرياضيات. تضمن النشاط تمارين تفاعلية ومسابقات جماعية.",
-    "نفذت حصة تطبيقية لتعزيز مهارات التفكير الناقد لدى الطلاب. ركزت على حل المشكلات والتحليل المنطقي.",
-    "تم تنظيم ورشة عمل لتعزيز التعلم النشط. شارك فيها طلاب الصفوف العليا في أنشطة عملية وتجريبية."
+    "تم تنفيذ نشاط تربوي لتعزيز المهارات الأساسية لدى الطلاب وتحسين مستوى التحصيل الدراسي بشكل عام.",
+    "نفذت مبادرة تعليمية هادفة لتنمية التفكير الناقد وحل المشكلات عند الطلاب المشاركين في البرنامج.",
+    "تم تطبيق استراتيجيات تعليمية مبتكرة لتحسين نواتج التعلم وزيادة تفاعل الطلاب داخل البيئة التعليمية."
   ],
   desc2: [
-    "تقسيم الطلاب لمجموعات عمل صغيرة. توزيع المهام حسب القدرات. استخدام وسائل تعليمية متنوعة. متابعة الأداء بشكل فردي.",
-    "تحضير الدروس مسبقاً مع الوسائل المناسبة. تنظيم بيئة صفية محفزة. تطبيق استراتيجيات تعليمية حديثة. تقييم فوري للإنجاز.",
-    "تحديد الأهداف التعليمية بوضوح. اختيار الأنشطة المناسبة للمستويات. توفير المواد المساعدة. تنفيذ التغذية الراجعة المستمرة."
+    "تخطيط البرنامج بدقة وتحديد الأهداف. توزيع المهام على المجموعات. استخدام وسائل تعليمية متنوعة. المتابعة المستمرة للأداء.",
+    "تحضير المواد التعليمية المناسبة. تطبيق أساليب التعلم النشط. توفير بيئة تعليمية محفزة. تقييم التقدم بشكل دوري.",
+    "تعزيز العمل الجماعي والتعاوني. تنويع أساليب العرض والتقديم. التركيز على المهارات التطبيقية. تقديم التغذية الراجعة الفورية."
   ],
   desc3: [
-    "تحسن ملحوظ في مستوى التحصيل الدراسي. ارتفاع معدلات المشاركة الصفية. زيادة تفاعل الطلاب مع الأنشطة.",
-    "تحقيق الأهداف التعليمية المخطط لها. تفاعل إيجابي من الطلاب. تحسن في نتائج التقييمات المستمرة.",
-    "زيادة دافعية الطلاب للتعلم. تحسن في المهارات الأساسية. نجاح في تحقيق نواتج التعلم المستهدفة."
+    "تحسن واضح في مستوى التحصيل الدراسي. زيادة المشاركة الإيجابية للطلاب. ارتفاع نسبة التفاعل مع الأنشطة المقدمة.",
+    "تحقيق الأهداف التعليمية المخطط لها. تفاعل إيجابي من المشاركين. تحسن في نتائج التقييمات والتقارير المقدمة.",
+    "زيادة دافعية الطلاب نحو التعلم. تنمية المهارات الأساسية المستهدفة. نجاح في تحقيق نواتج التعلم المرجوة."
   ],
   desc4: [
-    "الاستمرار في تطبيق الأنشطة الإثرائية. تعميم التجربة على بقية الفصول. تنظيم دورات تدريبية للمعلمين.",
-    "تطوير المزيد من الوسائل التعليمية. توسيع نطاق الأنشطة اللاصفية. تعزيز الشراكة مع أولياء الأمور.",
-    "توثيق الممارسات الناجحة. الاستفادة من التغذية الراجعة. التخطيط لأنشطة مستقبلية مماثلة."
+    "الاستمرار في تطبيق البرامج الإثرائية الناجحة. تعميم التجارب المتميزة. تنظيم ورش عمل لتبادل الخبرات.",
+    "تطوير الوسائل التعليمية المستخدمة. توسيع نطاق البرامج ليشمل فئات أكثر. تعزيز التعاون مع الجهات ذات العلاقة.",
+    "توثيق الممارسات التعليمية الناجحة. الاستفادة من التغذية الراجعة للتحسين. التخطيط لبرامج مستقبلية مماثلة."
   ]
 };
 
@@ -810,9 +777,6 @@ function pasteDefaultText(textareaId, text) {
   // تشغيل حدث oninput يدوياً لتحديث العداد
   const event = new Event('input', { bubbles: true });
   textarea.dispatchEvent(event);
-  
-  // إظهار رسالة تأكيد
-  showMessage('تم لصق النص الافتراضي');
 }
 
 // دالة مسح النص
@@ -826,34 +790,6 @@ function clearText(textareaId, targetId, counterId) {
   // تشغيل حدث oninput يدوياً
   const event = new Event('input', { bubbles: true });
   textarea.dispatchEvent(event);
-  
-  // إظهار رسالة تأكيد
-  showMessage('تم مسح النص');
-}
-
-// دالة إظهار رسالة
-function showMessage(message) {
-  const messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
-  messageDiv.style.cssText = `
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent-color);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    z-index: 10000;
-    font-size: 14px;
-    box-shadow: var(--shadow);
-  `;
-  
-  document.body.appendChild(messageDiv);
-  
-  setTimeout(() => {
-    document.body.removeChild(messageDiv);
-  }, 2000);
 }
 
 function sync(id,val){
@@ -861,7 +797,6 @@ function sync(id,val){
   
   // تحديث حقل البند التربوي في التقرير
   if (id === 'title') {
-    // تحديث البند التربوي أيضاً عند اختيار عنوان التقرير
     const educationItem = document.getElementById('education-item');
     if (educationItem.value) {
       document.getElementById('axis').textContent = educationItem.value;
@@ -903,17 +838,8 @@ function limitWords(el, target, counterId){
   }
   
   const counter = document.getElementById(counterId);
-  const remainingElement = document.getElementById(counterId.replace('c', 'c') + '-remaining');
-  const remaining = 15 - words.length;
-  
   counter.textContent = `${words.length} / 15 كلمة`;
   counter.classList.toggle('limit', words.length === 15);
-  
-  if (remainingElement) {
-    remainingElement.textContent = remaining;
-    remainingElement.style.color = remaining <= 3 ? '#e74c3c' : '#6a8a85';
-    remainingElement.style.fontWeight = remaining <= 3 ? 'bold' : 'normal';
-  }
   
   document.getElementById(target).textContent = text;
 }
@@ -954,7 +880,7 @@ imagesInput.addEventListener('change', e => {
   });
 });
 
-// دالة إعداد الطباعة مع رسالة تأكيد
+// دالة إعداد الطباعة (بدون رسالة تأكيد)
 function preparePrint() {
   // التحقق من الحقول المطلوبة
   const requiredFields = ['education-department', 'school', 'education-item', 'report-title-select', 'date'];
@@ -974,19 +900,8 @@ function preparePrint() {
     return;
   }
   
-  // عرض رسالة التأكيد
-  const confirmation = document.getElementById('confirmationMessage');
-  confirmation.classList.add('show');
-  
-  // إخفاء الرسالة بعد 3 ثوان
-  setTimeout(() => {
-    confirmation.classList.remove('show');
-  }, 3000);
-  
-  // بدء عملية الطباعة بعد تأخير قصير
-  setTimeout(() => {
-    window.print();
-  }, 500);
+  // بدء عملية الطباعة مباشرة
+  window.print();
 }
 
 function resetForm(){
@@ -999,7 +914,7 @@ function resetForm(){
   
   // مسح المحتوى النصي
   document.querySelectorAll('[id]').forEach(e => {
-    if (!['c1', 'c2', 'c3', 'c4', 'c1-remaining', 'c2-remaining', 'c3-remaining', 'c4-remaining'].includes(e.id)) {
+    if (!['c1', 'c2', 'c3', 'c4'].includes(e.id)) {
       e.textContent = '';
     }
   });
@@ -1010,16 +925,6 @@ function resetForm(){
     if (counter) {
       counter.textContent = '0 / 15 كلمة';
       counter.classList.remove('limit');
-    }
-  });
-  
-  // إعادة تعيين العدادات المتبقية
-  ['c1-remaining', 'c2-remaining', 'c3-remaining', 'c4-remaining'].forEach(id => {
-    const remaining = document.getElementById(id);
-    if (remaining) {
-      remaining.textContent = '15';
-      remaining.style.color = '#6a8a85';
-      remaining.style.fontWeight = 'normal';
     }
   });
   
