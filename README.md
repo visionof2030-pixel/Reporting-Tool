@@ -305,141 +305,198 @@ button:active{
   .header{
     background:#0a3b40;
     color:white;
-    padding:4px 6px;
-    border-radius:6px;
+    padding:8px 10px;
+    border-radius:8px;
     text-align:center;
-    font-size:11px;
-    margin-bottom:6px;
+    font-size:14px;
+    margin-bottom:10px;
+    font-weight: bold;
   }
   
   /* ===== معلومات التقرير (مصغّرة) ===== */
   .info-grid{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:5px;
-    margin-bottom:6px;
+    grid-template-columns:repeat(3, 1fr);
+    gap:8px;
+    margin-bottom:12px;
   }
+  
   .info-box{
     border:2px solid #cfd8dc;
-    border-radius:7px;
-    padding:3px 4px;
+    border-radius:8px;
+    padding:6px 8px;
     text-align:center;
-    font-size:10px;
+    font-size:12px;
+    min-height: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
+  
   .info-box span{
     display:block;
     background:#0a3b40;
     color:white;
     border-radius:5px;
-    padding:1px;
+    padding:3px;
     font-weight:700;
-    font-size:9px;
-    margin-bottom:2px;
+    font-size:10px;
+    margin-bottom:4px;
+  }
+  
+  .info-box div {
+    font-size: 11px;
+    line-height: 1.3;
+    word-break: break-word;
   }
   
   /* ===== المحتوى ===== */
   .grid-desc{
     display:flex;
-    gap:8px;
-    margin-bottom:8px;
+    gap:10px;
+    margin-bottom:12px;
   }
   
   .desc-box{
     border:2px solid #cfd8dc;
     border-radius:10px;
-    padding:8px;
+    padding:10px;
     background:#f9fbfb;
     font-size:12px;
     display:flex;
     flex-direction:column;
   }
-  .desc-box.big{min-height:110px;flex:1}
-  .desc-box.small{min-height:80px;flex:1}
+  
+  .desc-box.big{
+    min-height:120px;
+    flex:1;
+  }
+  
+  .desc-box.small{
+    min-height:90px;
+    flex:1;
+  }
   
   .desc-box strong{
     border-bottom:1px dashed #cfd8dc;
-    padding-bottom:4px;
-    margin-bottom:6px;
+    padding-bottom:6px;
+    margin-bottom:8px;
     color:#0a3b40;
+    font-size:13px;
   }
-  .desc-box p{white-space:pre-line;flex:1}
+  
+  .desc-box p{
+    white-space:pre-line;
+    flex:1;
+    font-size: 11px;
+    line-height: 1.4;
+  }
   
   .vertical{
-    width:32px;
+    width:35px;
     background:#eef3f1;
     border-radius:8px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:700;
+    font-size: 14px;
   }
   
   /* ===== الصور مع الإطار ===== */
   .images-section {
-    margin-top: 12px;
+    margin-top: 15px;
     border: 2px solid #cfd8dc;
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
     background: #f9fbfb;
+    page-break-inside: avoid;
   }
   
   .images-title {
     text-align: center;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 14px;
     color: #0a3b40;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px dashed #cfd8dc;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px dashed #cfd8dc;
   }
   
   .images-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    gap:12px;
   }
   
   .image-container {
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 6px;
+    padding: 8px;
     background: white;
     text-align: center;
   }
   
   .images-grid img{
     width:100%;
-    height:120px;
+    height:130px;
     object-fit:cover;
     border-radius:6px;
     display: block;
+    border: 1px solid #eee;
   }
   
   .image-caption {
-    font-size: 9px;
+    font-size: 10px;
     color: #666;
-    margin-top: 4px;
-    padding-top: 3px;
+    margin-top: 6px;
+    padding-top: 4px;
     border-top: 1px dotted #ddd;
+    font-weight: bold;
   }
   
-  /* ===== التوقيعات ===== */
+  /* ===== التوقيعات - تم تكبير الخط ===== */
   .signatures{
-    margin-top:22px;
+    margin-top:25px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:40px;
-    border-top:2px solid #cfd8dc;
-    padding-top:14px;
+    gap:50px;
+    border-top:3px solid #cfd8dc;
+    padding-top:18px;
+    page-break-inside: avoid;
   }
+  
   .signature-box{
     text-align:center;
-    font-size:12px;
+    font-size:15px !important;
+    font-weight: bold;
   }
+  
+  .signature-name {
+    font-size: 16px !important;
+    font-weight: bold;
+    color: #0a3b40;
+    margin-bottom: 8px;
+    padding: 5px;
+    background: #f0f7f5;
+    border-radius: 6px;
+    border: 1px solid #cfd8dc;
+  }
+  
   .signature-line{
-    border-bottom:2px solid #000;
-    height:26px;
-    margin:8px 0;
+    border-bottom:3px solid #000;
+    height:35px;
+    margin:12px 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .signature-label {
+    font-size: 13px;
+    color: #555;
+    margin-top: 5px;
+    font-weight: bold;
   }
 }
 
@@ -455,6 +512,17 @@ button:active{
 
 .hijri-info strong {
   color: var(--primary);
+}
+
+/* تحسين العرض على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .tool {
+    padding: 20px;
+  }
+  
+  .form-section {
+    padding: 15px;
+  }
 }
 
 </style>
@@ -492,7 +560,7 @@ button:active{
     </div>
     <div>
       <label>اسم المدرسة</label>
-      <input oninput="sync('school',this.value)">
+      <input id="schoolInput" oninput="sync('school',this.value)">
     </div>
   </div>
 </div>
@@ -531,11 +599,11 @@ button:active{
     <div class="date-group">
       <div class="date-input">
         <label>تاريخ التنفيذ (ميلادي)</label>
-        <input type="date" id="gregorianDate" oninput="updateHijriDate(); sync('date', getFormattedDate())">
+        <input type="date" id="gregorianDate" oninput="updateDates()">
       </div>
       <div class="date-input">
         <label>تاريخ التنفيذ (هجري)</label>
-        <input type="text" id="hijriDate" placeholder="سيتم التحويل تلقائياً" oninput="sync('hijriDate', this.value)">
+        <input type="text" id="hijriDateInput" placeholder="سيتم التحويل تلقائياً" oninput="sync('hijriDateReport', this.value)">
       </div>
       <button type="button" class="date-convert-btn" onclick="convertToHijri()">تحويل التاريخ إلى هجري</button>
     </div>
@@ -552,13 +620,13 @@ button:active{
     </div>
     <div>
       <label>اسم المعلم</label>
-      <input oninput="sync('teacher',this.value)">
+      <input id="teacherInput" oninput="sync('teacher',this.value)">
     </div>
   </div>
   
   <div>
     <label>اسم مدير المدرسة</label>
-    <input oninput="sync('principal',this.value)">
+    <input id="principalInput" oninput="sync('principal',this.value)">
   </div>
   
   <div class="hijri-info">
@@ -612,7 +680,7 @@ button:active{
 </div>
 
 <div class="button-group">
-  <button class="export-btn" onclick="window.print()">
+  <button class="export-btn" onclick="generatePDF()">
     <span>📄</span> تصدير PDF
   </button>
   <button class="reset-btn" onclick="resetForm()">
@@ -630,9 +698,9 @@ button:active{
 
   <div class="info-grid">
     <div class="info-box"><span>البند</span><div id="axis"></div></div>
-    <div class="info-box"><span>العنوان</span><div id="title"></div></div>
-    <div class="info-box"><span>التاريخ الميلادي</span><div id="date"></div></div>
-    <div class="info-box"><span>التاريخ الهجري</span><div id="hijriDate"></div></div>
+    <div class="info-box"><span>عنوان التقرير</span><div id="title"></div></div>
+    <div class="info-box"><span>التاريخ الميلادي</span><div id="gregorianDateReport"></div></div>
+    <div class="info-box"><span>التاريخ الهجري</span><div id="hijriDateReport"></div></div>
     <div class="info-box"><span>المستهدفون</span><div id="target"></div></div>
     <div class="info-box"><span>عدد المستفيدين</span><div id="count"></div></div>
   </div>
@@ -656,14 +724,14 @@ button:active{
 
   <div class="signatures">
     <div class="signature-box">
-      اسم المعلم: <strong id="teacher"></strong>
+      <div class="signature-name" id="teacher"></div>
       <div class="signature-line"></div>
-      التوقيع
+      <div class="signature-label">توقيع المعلم</div>
     </div>
     <div class="signature-box">
-      مدير المدرسة: <strong id="principal"></strong>
+      <div class="signature-name" id="principal"></div>
       <div class="signature-line"></div>
-      التوقيع
+      <div class="signature-label">توقيع مدير المدرسة</div>
     </div>
   </div>
 </div>
@@ -802,7 +870,7 @@ const autoTexts = {
     results: [
       "زيادة ملحوظة في تفاعل الطلاب ومشاركتهم الفعالة خلال الحصة الدراسية مقارنة بالأساليب التقليدية.",
       "تحسن في استيعاب المفاهيم التعليمية وترسيخ المعلومات نتيجة دمج الجانب النظري مع التطبيق العملي.",
-      "تنمية مهارات العمل الجماعي والتوcommunicate الفعال بين الطلاب من خلال الأنشطة التعاونية المطبقة.",
+      "تنمية مهارات العمل الجماعي والتواصل الفعال بين الطلاب من خلال الأنشطة التعاونية المطبقة.",
       "ارتفاع مستوى دافعية الطلاب للتعلم وتحسن اتجاهاتهم نحو المادة الدراسية والحصص الصفية.",
       "تطوير مهارات التفكير الإبداعي وحل المشكلات لدى الطلاب عبر الأنشطة التحدية المصممة لهم."
     ],
@@ -818,7 +886,10 @@ const autoTexts = {
 
 // وظائف عامة
 function sync(id, val) {
-  document.getElementById(id).textContent = val;
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = val;
+  }
 }
 
 function limitWords(el, target, counterId) {
@@ -915,7 +986,7 @@ function applyAutoText(inputId, targetId, counterId, text) {
 // تحويل التاريخ الميلادي إلى هجري
 function convertToHijri() {
   const gregorianInput = document.getElementById('gregorianDate');
-  const hijriInput = document.getElementById('hijriDate');
+  const hijriInput = document.getElementById('hijriDateInput');
   
   if (!gregorianInput.value) {
     alert('الرجاء إدخال تاريخ ميلادي أولاً');
@@ -927,29 +998,57 @@ function convertToHijri() {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   
+  // تنسيق التاريخ الميلادي للعرض
+  const gregorianDateStr = formatGregorianDate(date);
+  sync('gregorianDateReport', gregorianDateStr);
+  
   // استخدام مكتبة umalqura للتحويل
   try {
-    const hijriDate = UmAlQura.GregorianToHijri(year, month, day);
-    const hijriDateStr = `${hijriDate.hd} ${getHijriMonthName(hijriDate.hm)} ${hijriDate.hy} هـ`;
-    hijriInput.value = hijriDateStr;
-    sync('hijriDate', hijriDateStr);
+    if (typeof UmAlQura !== 'undefined') {
+      const hijriDate = UmAlQura.GregorianToHijri(year, month, day);
+      const hijriDateStr = `${hijriDate.hd} ${getHijriMonthName(hijriDate.hm)} ${hijriDate.hy} هـ`;
+      hijriInput.value = hijriDateStr;
+      sync('hijriDateReport', hijriDateStr);
+    } else {
+      // في حالة فشل التحويل، نستخدم طريقة تقريبية
+      const hijriYear = Math.round((year - 622) * (33/32));
+      const hijriMonth = getHijriMonthName(month);
+      const hijriDay = day;
+      const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
+      hijriInput.value = hijriDateStr;
+      sync('hijriDateReport', hijriDateStr);
+    }
   } catch (error) {
-    // في حالة فشل التحويل، نستخدم طريقة تقريبية
+    console.error('خطأ في تحويل التاريخ:', error);
+    // طريقة بديلة
     const hijriYear = Math.round((year - 622) * (33/32));
     const hijriMonth = getHijriMonthName(month);
     const hijriDay = day;
     const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
     hijriInput.value = hijriDateStr;
-    sync('hijriDate', hijriDateStr);
+    sync('hijriDateReport', hijriDateStr);
   }
 }
 
-// تحديث التاريخ الهجري تلقائياً عند تغيير الميلادي
-function updateHijriDate() {
+// تحديث التواريخ عند تغيير التاريخ الميلادي
+function updateDates() {
   const gregorianInput = document.getElementById('gregorianDate');
+  
   if (gregorianInput.value) {
+    // تحديث التاريخ الميلادي في التقرير
+    const date = new Date(gregorianInput.value);
+    const gregorianDateStr = formatGregorianDate(date);
+    sync('gregorianDateReport', gregorianDateStr);
+    
+    // تحويل إلى هجري
     convertToHijri();
   }
+}
+
+// تنسيق التاريخ الميلادي للعرض
+function formatGregorianDate(date) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('ar-SA', options);
 }
 
 // الحصول على اسم الشهر الهجري
@@ -960,16 +1059,6 @@ function getHijriMonthName(month) {
     'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
   ];
   return hijriMonths[month - 1] || '';
-}
-
-// تنسيق التاريخ لعرضه
-function getFormattedDate() {
-  const gregorianInput = document.getElementById('gregorianDate');
-  if (!gregorianInput.value) return '';
-  
-  const date = new Date(gregorianInput.value);
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('ar-SA', options);
 }
 
 // معالجة رفع الصور
@@ -1006,6 +1095,21 @@ imagesInput.addEventListener('change', e => {
   });
 });
 
+// دالة لإنشاء PDF
+function generatePDF() {
+  // التأكد من تحديث جميع البيانات
+  updateDates();
+  
+  // تحويل التاريخ الهجري إذا كان فارغاً
+  const hijriInput = document.getElementById('hijriDateInput');
+  if (!hijriInput.value && document.getElementById('gregorianDate').value) {
+    convertToHijri();
+  }
+  
+  // طباعة التقرير
+  window.print();
+}
+
 // إعادة تعيين النموذج
 function resetForm() {
   if (!confirm('هل تريد مسح جميع الخانات؟')) return;
@@ -1018,8 +1122,8 @@ function resetForm() {
   });
   
   // مسح محتوى التقرير
-  document.querySelectorAll('[id]').forEach(e => {
-    if (e.id && !e.classList.contains('tool') && !e.classList.contains('report')) {
+  document.querySelectorAll('.report [id]').forEach(e => {
+    if (e.id) {
       e.textContent = '';
     }
   });
@@ -1039,12 +1143,12 @@ function resetForm() {
   });
 }
 
-// تهيئة التاريخ الحالي
+// تهيئة التاريخ الحالي عند تحميل الصفحة
 window.addEventListener('DOMContentLoaded', () => {
   const today = new Date();
   const formattedDate = today.toISOString().split('T')[0];
   document.getElementById('gregorianDate').value = formattedDate;
-  updateHijriDate();
+  updateDates();
 });
 </script>
 </body>
