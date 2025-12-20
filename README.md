@@ -344,7 +344,7 @@ button:active{
   /* ===== معلومات التقرير (مصغّرة جداً) ===== */
   .info-grid{
     display:grid;
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:repeat(4, 1fr);
     gap:4px;
     margin-bottom:6px;
     font-size: 9px;
@@ -378,12 +378,6 @@ button:active{
     font-size: 8px;
     line-height: 1.1;
     word-break: break-word;
-  }
-  
-  /* إزالة معلومات التاريخ من الشبكة */
-  .info-box:nth-child(3),
-  .info-box:nth-child(4) {
-    display: none;
   }
   
   /* ===== المحتوى ===== */
@@ -650,20 +644,20 @@ button:active{
       </div>
       <div class="date-input">
         <label>تاريخ التنفيذ (هجري)</label>
-        <input type="text" id="hijriDateInput" placeholder="سيتم التحويل تلقائياً" oninput="sync('hijriDateReport', this.value)">
+        <input type="text" id="hijriDateInput" placeholder="سيتم التحويل تلقائياً" oninput="updateHijriDate()">
       </div>
       <button type="button" class="date-convert-btn" onclick="convertToHijri()">تحويل التاريخ إلى هجري</button>
     </div>
     <div>
       <label>المستهدفون</label>
-      <input oninput="sync('target',this.value)">
+      <input id="targetInput" oninput="sync('target',this.value)">
     </div>
   </div>
   
   <div class="input-group">
     <div>
       <label>عدد المستفيدين</label>
-      <input type="number" oninput="sync('count',this.value)">
+      <input type="number" id="countInput" oninput="sync('count',this.value)">
     </div>
     <div>
       <label>اسم المعلم</label>
@@ -1077,10 +1071,10 @@ function convertToHijri() {
       hijriInput.value = hijriDateStr;
       document.getElementById('hijriDateReport').textContent = hijriDateStr;
     } else {
-      // في حالة فشل التحويل، نستخدم طريقة تقريبية
-      const hijriYear = Math.round((date.getFullYear() - 622) * (33/32));
-      const hijriMonth = getHijriMonthName(date.getMonth() + 1);
-      const hijriDay = date.getDate();
+      // في حالة فشل التحويل، نستخدم طريقة تقريبية أكثر دقة
+      const hijriYear = Math.floor((year - 622) * (33/32));
+      const hijriMonth = getHijriMonthName(month);
+      const hijriDay = day;
       const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
       
       hijriInput.value = hijriDateStr;
@@ -1089,7 +1083,7 @@ function convertToHijri() {
   } catch (error) {
     console.error('خطأ في تحويل التاريخ:', error);
     // طريقة بديلة
-    const hijriYear = Math.round((date.getFullYear() - 622) * (33/32));
+    const hijriYear = Math.floor((date.getFullYear() - 622) * (33/32));
     const hijriMonth = getHijriMonthName(date.getMonth() + 1);
     const hijriDay = date.getDate();
     const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
@@ -1113,6 +1107,12 @@ function updateDates() {
     // تحويل إلى هجري
     convertToHijri();
   }
+}
+
+// تحديث التاريخ الهجري عند الإدخال اليدوي
+function updateHijriDate() {
+  const hijriInput = document.getElementById('hijriDateInput');
+  document.getElementById('hijriDateReport').textContent = hijriInput.value;
 }
 
 // الحصول على اسم الشهر الهجري
@@ -1162,6 +1162,15 @@ imagesInput.addEventListener('change', e => {
 // دالة لإنشاء PDF
 function generatePDF() {
   // التأكد من تحديث جميع البيانات
+  
+  // تحديث المستهدفون وعدد المستفيدين
+  const targetInput = document.getElementById('targetInput');
+  const countInput = document.getElementById('countInput');
+  
+  sync('target', targetInput.value);
+  sync('count', countInput.value);
+  
+  // تحديث التواريخ
   updateDates();
   
   // تحويل التاريخ الهجري إذا كان فارغاً
