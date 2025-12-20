@@ -2,6 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <title>أداة إعداد التقارير التعليمية</title>
+<script src="https://cdn.jsdelivr.net/npm/umalqura@2.0.0/umalqura.min.js"></script>
 <style>
 @font-face{
   font-family:'KufamLocal';
@@ -257,6 +258,40 @@ button:active{
   margin-right: 8px;
 }
 
+.date-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.date-group .date-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-input label {
+  font-size: 14px;
+  color: var(--secondary);
+}
+
+.date-convert-btn {
+  grid-column: span 2;
+  background: var(--light-gray);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.date-convert-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
 /* ===== التقرير للطباعة ===== */
 .report{display:none;}
 @page{size:A4;margin:14mm;}
@@ -280,7 +315,7 @@ button:active{
   /* ===== معلومات التقرير (مصغّرة) ===== */
   .info-grid{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(6,1fr);
     gap:5px;
     margin-bottom:6px;
   }
@@ -339,18 +374,53 @@ button:active{
     font-weight:700;
   }
   
-  /* ===== الصور ===== */
-  .images{
+  /* ===== الصور مع الإطار ===== */
+  .images-section {
+    margin-top: 12px;
+    border: 2px solid #cfd8dc;
+    border-radius: 10px;
+    padding: 10px;
+    background: #f9fbfb;
+  }
+  
+  .images-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #0a3b40;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #cfd8dc;
+  }
+  
+  .images-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:10px;
-    margin-top:12px;
   }
-  .images img{
+  
+  .image-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 6px;
+    background: white;
+    text-align: center;
+  }
+  
+  .images-grid img{
     width:100%;
     height:120px;
     object-fit:cover;
-    border-radius:8px;
+    border-radius:6px;
+    display: block;
+  }
+  
+  .image-caption {
+    font-size: 9px;
+    color: #666;
+    margin-top: 4px;
+    padding-top: 3px;
+    border-top: 1px dotted #ddd;
   }
   
   /* ===== التوقيعات ===== */
@@ -372,6 +442,21 @@ button:active{
     margin:8px 0;
   }
 }
+
+/* ===== تحسينات الواجهة ===== */
+.hijri-info {
+  background: #f0f7f5;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  border-right: 3px solid var(--accent);
+  font-size: 14px;
+}
+
+.hijri-info strong {
+  color: var(--primary);
+}
+
 </style>
 </head>
 
@@ -443,9 +528,16 @@ button:active{
   </div>
   
   <div class="input-group">
-    <div>
-      <label>تاريخ التنفيذ</label>
-      <input type="date" oninput="sync('date',this.value)">
+    <div class="date-group">
+      <div class="date-input">
+        <label>تاريخ التنفيذ (ميلادي)</label>
+        <input type="date" id="gregorianDate" oninput="updateHijriDate(); sync('date', getFormattedDate())">
+      </div>
+      <div class="date-input">
+        <label>تاريخ التنفيذ (هجري)</label>
+        <input type="text" id="hijriDate" placeholder="سيتم التحويل تلقائياً" oninput="sync('hijriDate', this.value)">
+      </div>
+      <button type="button" class="date-convert-btn" onclick="convertToHijri()">تحويل التاريخ إلى هجري</button>
     </div>
     <div>
       <label>المستهدفون</label>
@@ -467,6 +559,10 @@ button:active{
   <div>
     <label>اسم مدير المدرسة</label>
     <input oninput="sync('principal',this.value)">
+  </div>
+  
+  <div class="hijri-info">
+    <strong>ملاحظة:</strong> أدخل التاريخ الميلادي وسيتم تحويله تلقائياً إلى هجري، أو أدخل التاريخ الهجري يدوياً.
   </div>
 </div>
 
@@ -535,7 +631,8 @@ button:active{
   <div class="info-grid">
     <div class="info-box"><span>البند</span><div id="axis"></div></div>
     <div class="info-box"><span>العنوان</span><div id="title"></div></div>
-    <div class="info-box"><span>التاريخ</span><div id="date"></div></div>
+    <div class="info-box"><span>التاريخ الميلادي</span><div id="date"></div></div>
+    <div class="info-box"><span>التاريخ الهجري</span><div id="hijriDate"></div></div>
     <div class="info-box"><span>المستهدفون</span><div id="target"></div></div>
     <div class="info-box"><span>عدد المستفيدين</span><div id="count"></div></div>
   </div>
@@ -552,7 +649,10 @@ button:active{
     <div class="desc-box small"><strong>التوصيات</strong><p id="desc4"></p></div>
   </div>
 
-  <div class="images" id="imagesContainer"></div>
+  <div class="images-section">
+    <div class="images-title">شواهد الصور</div>
+    <div class="images-grid" id="imagesContainer"></div>
+  </div>
 
   <div class="signatures">
     <div class="signature-box">
@@ -702,7 +802,7 @@ const autoTexts = {
     results: [
       "زيادة ملحوظة في تفاعل الطلاب ومشاركتهم الفعالة خلال الحصة الدراسية مقارنة بالأساليب التقليدية.",
       "تحسن في استيعاب المفاهيم التعليمية وترسيخ المعلومات نتيجة دمج الجانب النظري مع التطبيق العملي.",
-      "تنمية مهارات العمل الجماعي والتواصل الفعال بين الطلاب من خلال الأنشطة التعاونية المطبقة.",
+      "تنمية مهارات العمل الجماعي والتوcommunicate الفعال بين الطلاب من خلال الأنشطة التعاونية المطبقة.",
       "ارتفاع مستوى دافعية الطلاب للتعلم وتحسن اتجاهاتهم نحو المادة الدراسية والحصص الصفية.",
       "تطوير مهارات التفكير الإبداعي وحل المشكلات لدى الطلاب عبر الأنشطة التحدية المصممة لهم."
     ],
@@ -812,6 +912,66 @@ function applyAutoText(inputId, targetId, counterId, text) {
   limitWords(input, targetId, counterId);
 }
 
+// تحويل التاريخ الميلادي إلى هجري
+function convertToHijri() {
+  const gregorianInput = document.getElementById('gregorianDate');
+  const hijriInput = document.getElementById('hijriDate');
+  
+  if (!gregorianInput.value) {
+    alert('الرجاء إدخال تاريخ ميلادي أولاً');
+    return;
+  }
+  
+  const date = new Date(gregorianInput.value);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  
+  // استخدام مكتبة umalqura للتحويل
+  try {
+    const hijriDate = UmAlQura.GregorianToHijri(year, month, day);
+    const hijriDateStr = `${hijriDate.hd} ${getHijriMonthName(hijriDate.hm)} ${hijriDate.hy} هـ`;
+    hijriInput.value = hijriDateStr;
+    sync('hijriDate', hijriDateStr);
+  } catch (error) {
+    // في حالة فشل التحويل، نستخدم طريقة تقريبية
+    const hijriYear = Math.round((year - 622) * (33/32));
+    const hijriMonth = getHijriMonthName(month);
+    const hijriDay = day;
+    const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
+    hijriInput.value = hijriDateStr;
+    sync('hijriDate', hijriDateStr);
+  }
+}
+
+// تحديث التاريخ الهجري تلقائياً عند تغيير الميلادي
+function updateHijriDate() {
+  const gregorianInput = document.getElementById('gregorianDate');
+  if (gregorianInput.value) {
+    convertToHijri();
+  }
+}
+
+// الحصول على اسم الشهر الهجري
+function getHijriMonthName(month) {
+  const hijriMonths = [
+    'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 
+    'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 
+    'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
+  ];
+  return hijriMonths[month - 1] || '';
+}
+
+// تنسيق التاريخ لعرضه
+function getFormattedDate() {
+  const gregorianInput = document.getElementById('gregorianDate');
+  if (!gregorianInput.value) return '';
+  
+  const date = new Date(gregorianInput.value);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('ar-SA', options);
+}
+
 // معالجة رفع الصور
 const imagesInput = document.getElementById('imagesInput');
 const imagesContainer = document.getElementById('imagesContainer');
@@ -824,12 +984,23 @@ imagesInput.addEventListener('change', e => {
     imagesInput.value = '';
     return;
   }
-  files.forEach(f => {
+  
+  files.forEach((f, index) => {
     const r = new FileReader();
     r.onload = ev => {
+      const imageContainer = document.createElement('div');
+      imageContainer.className = 'image-container';
+      
       const img = document.createElement('img');
       img.src = ev.target.result;
-      imagesContainer.appendChild(img);
+      
+      const caption = document.createElement('div');
+      caption.className = 'image-caption';
+      caption.textContent = `صورة ${index + 1}`;
+      
+      imageContainer.appendChild(img);
+      imageContainer.appendChild(caption);
+      imagesContainer.appendChild(imageContainer);
     };
     r.readAsDataURL(f);
   });
@@ -867,6 +1038,14 @@ function resetForm() {
     document.getElementById(id).classList.remove('limit');
   });
 }
+
+// تهيئة التاريخ الحالي
+window.addEventListener('DOMContentLoaded', () => {
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0];
+  document.getElementById('gregorianDate').value = formattedDate;
+  updateHijriDate();
+});
 </script>
 </body>
 </html>
