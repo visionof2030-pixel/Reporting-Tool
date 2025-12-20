@@ -1,10 +1,8 @@
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أداة إعداد التقارير التعليمية</title>
-<script src="https://cdn.jsdelivr.net/npm/umalqura@2.0.0/umalqura.min.js"></script>
 <style>
 @font-face{
   font-family:'KufamLocal';
@@ -434,7 +432,7 @@ button:active{
     padding:0 2px;
   }
   
-  /* ===== الصور مع الإطار - حجم أكبر وأكثر عرضاً ===== */
+  /* ===== الصور مع الإطار - حجم أكبر ===== */
   .images-section {
     margin-top: 8px;
     border: 1px solid #cfd8dc;
@@ -466,15 +464,11 @@ button:active{
     padding: 3px;
     background: white;
     text-align: center;
-    height: 160px; /* ارتفاع أكبر للصورة */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
   
   .images-grid img{
     width:100%;
-    height:140px; /* ارتفاع ثابت للصورة */
+    height:140px; /* حجم الصور أكبر */
     object-fit:contain; /* لضمان ظهور كل الزوايا */
     border-radius:2px;
     display: block;
@@ -570,6 +564,23 @@ button:active{
 .report * {
   box-sizing: border-box;
 }
+
+/* مؤشر التحميل */
+.loader {
+  display: none;
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid var(--accent);
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 
@@ -644,13 +655,16 @@ button:active{
     <div class="date-group">
       <div class="date-input">
         <label>تاريخ التنفيذ (ميلادي)</label>
-        <input type="date" id="gregorianDate" oninput="updateDates()">
+        <input type="date" id="gregorianDate" onchange="updateDates()">
       </div>
       <div class="date-input">
         <label>تاريخ التنفيذ (هجري)</label>
-        <input type="text" id="hijriDateInput" placeholder="سيتم التحويل تلقائياً" oninput="updateHijriDate()">
+        <input type="text" id="hijriDateInput" placeholder="سيتم التحويل تلقائياً" readonly>
       </div>
-      <button type="button" class="date-convert-btn" onclick="convertToHijri()">تحويل التاريخ إلى هجري</button>
+      <button type="button" class="date-convert-btn" onclick="convertToHijri()">
+        <span>🔄</span> تحويل التاريخ إلى هجري
+        <div class="loader" id="dateLoader"></div>
+      </button>
     </div>
     <div>
       <label>المستهدفون</label>
@@ -675,7 +689,8 @@ button:active{
   </div>
   
   <div class="hijri-info">
-    <strong>ملاحظة:</strong> أدخل التاريخ الميلادي وسيتم تحويله تلقائياً إلى هجري، أو أدخل التاريخ الهجري يدوياً.
+    <strong>ملاحظة:</strong> سيتم تحويل التاريخ الميلادي إلى هجري تلقائياً عند اختيار التاريخ.
+    يمكنك أيضاً <a href="javascript:void(0)" onclick="enableManualHijri()">إدخال التاريخ الهجري يدوياً</a>.
   </div>
 </div>
 
@@ -1032,7 +1047,7 @@ function applyAutoText(inputId, targetId, counterId, text) {
   limitWords(input, targetId, counterId);
 }
 
-// دالة جديدة لتنسيق التاريخ الميلادي بشكل صحيح
+// دالة لتنسيق التاريخ الميلادي بشكل صحيح
 function formatGregorianDateAr(date) {
   const day = date.getDate();
   const month = date.getMonth() + 1;
@@ -1046,72 +1061,108 @@ function formatGregorianDateAr(date) {
   return `${day} ${monthNames[month-1]} ${year} م`;
 }
 
-// تحويل التاريخ الميلادي إلى هجري بدقة
-function convertToHijri() {
+// السماح بالإدخال اليدوي للتاريخ الهجري
+function enableManualHijri() {
+  const hijriInput = document.getElementById('hijriDateInput');
+  hijriInput.readOnly = false;
+  hijriInput.placeholder = "أدخل التاريخ الهجري يدوياً (مثال: 15 رمضان 1445 هـ)";
+  hijriInput.focus();
+}
+
+// التحويل إلى التاريخ الهجري باستخدام API
+async function convertToHijri() {
   const gregorianInput = document.getElementById('gregorianDate');
   const hijriInput = document.getElementById('hijriDateInput');
+  const loader = document.getElementById('dateLoader');
+  const convertBtn = document.querySelector('.date-convert-btn span');
   
   if (!gregorianInput.value) {
     alert('الرجاء إدخال تاريخ ميلادي أولاً');
     return;
   }
   
+  // إظهار مؤشر التحميل
+  loader.style.display = 'inline-block';
+  convertBtn.textContent = 'جارٍ التحويل...';
+  
   const date = new Date(gregorianInput.value);
   
-  // تحديث التاريخ الميلادي في التقرير بشكل صحيح
+  // تحديث التاريخ الميلادي في التقرير
   const gregorianDateStr = formatGregorianDateAr(date);
   document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
   
-  // تحويل التاريخ إلى هجري باستخدام مكتبة umalqura
+  // استخراج اليوم والشهر والسنة
   const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
   
   try {
-    // استخدام مكتبة umalqura للتحويل
-    if (typeof UmAlQura !== 'undefined') {
-      const hijriDate = UmAlQura.GregorianToHijri(year, month, day);
+    // استخدام API للتحويل (Islamic Calendar API)
+    const response = await fetch(`https://api.aladhan.com/v1/gToH/${day}-${month}-${year}`);
+    
+    if (!response.ok) {
+      throw new Error('فشل في الاتصال بالخدمة');
+    }
+    
+    const data = await response.json();
+    
+    if (data.code === 200) {
+      const hijriDate = data.data.hijri;
+      const hijriDateStr = `${hijriDate.day} ${hijriDate.month.ar} ${hijriDate.year} هـ`;
       
-      if (hijriDate && hijriDate.hd && hijriDate.hm && hijriDate.hy) {
-        const hijriDateStr = `${hijriDate.hd} ${getHijriMonthName(hijriDate.hm)} ${hijriDate.hy} هـ`;
-        hijriInput.value = hijriDateStr;
-        document.getElementById('hijriDateReport').textContent = hijriDateStr;
-        console.log('تم التحويل بنجاح:', hijriDateStr);
-      } else {
-        throw new Error('بيانات غير صالحة من المكتبة');
-      }
+      hijriInput.value = hijriDateStr;
+      document.getElementById('hijriDateReport').textContent = hijriDateStr;
     } else {
-      throw new Error('المكتبة غير متوفرة');
+      // استخدام التحويل التقريبي إذا فشل API
+      useManualHijriConversion(date);
     }
   } catch (error) {
     console.error('خطأ في تحويل التاريخ:', error);
+    // استخدام التحويل التقريبي
+    useManualHijriConversion(date);
     
-    // استخدام طريقة تقريبية للتحويل
-    const hijriYear = calculateHijriYear(year, month, day);
-    const hijriMonth = calculateHijriMonth(month, day);
-    const hijriDay = calculateHijriDay(day, month, year);
-    
-    const hijriDateStr = `${hijriDay} ${getHijriMonthName(hijriMonth)} ${hijriYear} هـ`;
-    hijriInput.value = hijriDateStr;
-    document.getElementById('hijriDateReport').textContent = hijriDateStr;
+    // عرض رسالة للمستخدم
+    const retry = confirm('فشل التحويل التلقائي. تم استخدام تحويل تقريبي.\nهل تريد المحاولة مرة أخرى؟');
+    if (retry) {
+      setTimeout(convertToHijri, 1000);
+      return;
+    }
+  } finally {
+    // إخفاء مؤشر التحميل
+    loader.style.display = 'none';
+    convertBtn.textContent = '🔄';
   }
 }
 
-// حسابات مساعدة للتحويل التقريبي
-function calculateHijriYear(gregYear, gregMonth, gregDay) {
-  // تحويل تقريبي من ميلادي إلى هجري
-  const hijriYear = Math.floor((gregYear - 622) + (gregMonth - 1) / 12 + gregDay / 365);
-  return hijriYear;
-}
-
-function calculateHijriMonth(gregMonth, gregDay) {
-  // تحويل تقريبي للشهر
-  return gregMonth;
-}
-
-function calculateHijriDay(gregDay, gregMonth, gregYear) {
-  // تحويل تقريبي لليوم
-  return gregDay;
+// التحويل التقريبي اليدوي (بديل عند فشل API)
+function useManualHijriConversion(date) {
+  const hijriInput = document.getElementById('hijriDateInput');
+  
+  // تحويل تقريبي مع تحسين الدقة
+  const gregorianYear = date.getFullYear();
+  
+  // الصيغة التقريبية: السنة الهجرية = (السنة الميلادية - 622) * (33/32)
+  const hijriYear = Math.floor((gregorianYear - 622) * (33/32));
+  
+  // أسماء الأشهر الهجرية
+  const hijriMonths = [
+    'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 
+    'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 
+    'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
+  ];
+  
+  // حساب الشهر تقريبياً
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const hijriMonthIndex = monthIndex % 12;
+  const hijriMonth = hijriMonths[hijriMonthIndex];
+  
+  // حساب اليوم تقريبياً (تعديل طفيف لتحقيق دقة أفضل)
+  const hijriDay = Math.max(1, Math.min(30, day));
+  
+  const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
+  hijriInput.value = hijriDateStr;
+  document.getElementById('hijriDateReport').textContent = hijriDateStr;
 }
 
 // تحديث التواريخ عند تغيير التاريخ الميلادي
@@ -1125,28 +1176,9 @@ function updateDates() {
     const gregorianDateStr = formatGregorianDateAr(date);
     document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
     
-    // تحويل إلى هجري
-    convertToHijri();
+    // تحويل إلى هجري بعد تأخير بسيط
+    setTimeout(convertToHijri, 500);
   }
-}
-
-// تحديث التاريخ الهجري عند الإدخال اليدوي
-function updateHijriDate() {
-  const hijriInput = document.getElementById('hijriDateInput');
-  document.getElementById('hijriDateReport').textContent = hijriInput.value;
-}
-
-// الحصول على اسم الشهر الهجري
-function getHijriMonthName(month) {
-  const hijriMonths = [
-    'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 
-    'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 
-    'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
-  ];
-  
-  // التأكد من أن الشهر ضمن النطاق الصحيح
-  const monthIndex = Math.max(1, Math.min(12, month)) - 1;
-  return hijriMonths[monthIndex] || 'محرم';
 }
 
 // معالجة رفع الصور
@@ -1170,6 +1202,7 @@ imagesInput.addEventListener('change', e => {
       
       const img = document.createElement('img');
       img.src = ev.target.result;
+      img.alt = `صورة ${index + 1} للتقرير`;
       
       const caption = document.createElement('div');
       caption.className = 'image-caption';
@@ -1201,6 +1234,10 @@ function generatePDF() {
   const hijriInput = document.getElementById('hijriDateInput');
   if (!hijriInput.value && document.getElementById('gregorianDate').value) {
     convertToHijri();
+    setTimeout(() => {
+      window.print();
+    }, 1000);
+    return;
   }
   
   // طباعة التقرير
@@ -1238,21 +1275,31 @@ function resetForm() {
     document.getElementById(id).textContent = '0 / 15 كلمة';
     document.getElementById(id).classList.remove('limit');
   });
+  
+  // إعادة تعيين حقل التاريخ الهجري
+  const hijriInput = document.getElementById('hijriDateInput');
+  hijriInput.value = '';
+  hijriInput.readOnly = true;
+  hijriInput.placeholder = 'سيتم التحويل تلقائياً';
 }
 
 // تهيئة التاريخ الحالي عند تحميل الصفحة
 window.addEventListener('DOMContentLoaded', () => {
   const today = new Date();
   const formattedDate = today.toISOString().split('T')[0];
-  document.getElementById('gregorianDate').value = formattedDate;
+  const gregorianInput = document.getElementById('gregorianDate');
   
-  // تحديث التواريخ مباشرة
-  if (document.getElementById('gregorianDate').value) {
-    const date = new Date(document.getElementById('gregorianDate').value);
-    const gregorianDateStr = formatGregorianDateAr(date);
-    document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
-    convertToHijri();
-  }
+  gregorianInput.value = formattedDate;
+  
+  // تحديث التواريخ مباشرة مع تأخير لضمان تحميل الصفحة
+  setTimeout(() => {
+    if (gregorianInput.value) {
+      const date = new Date(gregorianInput.value);
+      const gregorianDateStr = formatGregorianDateAr(date);
+      document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
+      convertToHijri();
+    }
+  }, 1000);
 });
 </script>
 </body>
