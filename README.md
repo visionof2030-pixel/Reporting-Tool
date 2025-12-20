@@ -303,7 +303,7 @@ button:active{
   .tool{display:none}
   .report{display:block; margin:0; padding:0; width:100%;}
   
-  /* ===== الهيدر المصغر ===== */
+  /* ===== الهيدر المصغر مع التواريخ في الزاوية اليسرى ===== */
   .header{
     background:#0a3b40;
     color:white;
@@ -314,6 +314,31 @@ button:active{
     margin-bottom:6px;
     font-weight: bold;
     line-height: 1.2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .header-info {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .date-header {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 8px;
+    line-height: 1.2;
+    text-align: left;
+    direction: ltr;
+    min-width: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .date-header div {
+    margin: 1px 0;
   }
   
   /* ===== معلومات التقرير (مصغّرة جداً) ===== */
@@ -353,6 +378,12 @@ button:active{
     font-size: 8px;
     line-height: 1.1;
     word-break: break-word;
+  }
+  
+  /* إزالة معلومات التاريخ من الشبكة */
+  .info-box:nth-child(3),
+  .info-box:nth-child(4) {
+    display: none;
   }
   
   /* ===== المحتوى ===== */
@@ -409,7 +440,7 @@ button:active{
     padding:0 2px;
   }
   
-  /* ===== الصور مع الإطار - حجم طبيعي ===== */
+  /* ===== الصور مع الإطار - حجم أكبر ===== */
   .images-section {
     margin-top: 8px;
     border: 1px solid #cfd8dc;
@@ -445,11 +476,12 @@ button:active{
   
   .images-grid img{
     width:100%;
-    height:120px; /* حجم الصور الطبيعي */
-    object-fit:cover;
+    height:140px; /* حجم الصور أكبر */
+    object-fit:contain; /* لضمان ظهور كل الزوايا */
     border-radius:2px;
     display: block;
     border: 1px solid #eee;
+    background-color: #f5f5f5;
   }
   
   .image-caption {
@@ -707,15 +739,19 @@ button:active{
 <!-- قسم التقرير للطباعة -->
 <div class="report">
   <div class="header">
-    <div id="edu"></div>
-    <div id="school"></div>
+    <div class="date-header">
+      <div id="gregorianDateReport"></div>
+      <div id="hijriDateReport"></div>
+    </div>
+    <div class="header-info">
+      <div id="edu"></div>
+      <div id="school"></div>
+    </div>
   </div>
 
   <div class="info-grid">
     <div class="info-box"><span>البند</span><div id="axis"></div></div>
     <div class="info-box"><span>عنوان التقرير</span><div id="title"></div></div>
-    <div class="info-box"><span>التاريخ الميلادي</span><div id="gregorianDateReport"></div></div>
-    <div class="info-box"><span>التاريخ الهجري</span><div id="hijriDateReport"></div></div>
     <div class="info-box"><span>المستهدفون</span><div id="target"></div></div>
     <div class="info-box"><span>عدد المستفيدين</span><div id="count"></div></div>
   </div>
@@ -998,6 +1034,20 @@ function applyAutoText(inputId, targetId, counterId, text) {
   limitWords(input, targetId, counterId);
 }
 
+// دالة جديدة لتنسيق التاريخ الميلادي بشكل صحيح
+function formatGregorianDateAr(date) {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  
+  const monthNames = [
+    "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+    "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+  ];
+  
+  return `${day} ${monthNames[month-1]} ${year} م`;
+}
+
 // تحويل التاريخ الميلادي إلى هجري
 function convertToHijri() {
   const gregorianInput = document.getElementById('gregorianDate');
@@ -1009,37 +1059,41 @@ function convertToHijri() {
   }
   
   const date = new Date(gregorianInput.value);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
   
-  // تحديث التاريخ الميلادي في التقرير بشكل منفصل
-  const gregorianDateStr = formatGregorianDate(date);
+  // تحديث التاريخ الميلادي في التقرير بشكل صحيح
+  const gregorianDateStr = formatGregorianDateAr(date);
   document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
   
-  // استخدام مكتبة umalqura للتحويل
+  // استخدام مكتبة umalqura للتحويل إلى هجري
   try {
     if (typeof UmAlQura !== 'undefined') {
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      
       const hijriDate = UmAlQura.GregorianToHijri(year, month, day);
       const hijriDateStr = `${hijriDate.hd} ${getHijriMonthName(hijriDate.hm)} ${hijriDate.hy} هـ`;
+      
       hijriInput.value = hijriDateStr;
       document.getElementById('hijriDateReport').textContent = hijriDateStr;
     } else {
       // في حالة فشل التحويل، نستخدم طريقة تقريبية
-      const hijriYear = Math.round((year - 622) * (33/32));
-      const hijriMonth = getHijriMonthName(month);
-      const hijriDay = day;
+      const hijriYear = Math.round((date.getFullYear() - 622) * (33/32));
+      const hijriMonth = getHijriMonthName(date.getMonth() + 1);
+      const hijriDay = date.getDate();
       const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
+      
       hijriInput.value = hijriDateStr;
       document.getElementById('hijriDateReport').textContent = hijriDateStr;
     }
   } catch (error) {
     console.error('خطأ في تحويل التاريخ:', error);
     // طريقة بديلة
-    const hijriYear = Math.round((year - 622) * (33/32));
-    const hijriMonth = getHijriMonthName(month);
-    const hijriDay = day;
+    const hijriYear = Math.round((date.getFullYear() - 622) * (33/32));
+    const hijriMonth = getHijriMonthName(date.getMonth() + 1);
+    const hijriDay = date.getDate();
     const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
+    
     hijriInput.value = hijriDateStr;
     document.getElementById('hijriDateReport').textContent = hijriDateStr;
   }
@@ -1053,18 +1107,12 @@ function updateDates() {
     const date = new Date(gregorianInput.value);
     
     // تحديث التاريخ الميلادي في التقرير
-    const gregorianDateStr = formatGregorianDate(date);
+    const gregorianDateStr = formatGregorianDateAr(date);
     document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
     
     // تحويل إلى هجري
     convertToHijri();
   }
-}
-
-// تنسيق التاريخ الميلادي للعرض
-function formatGregorianDate(date) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('ar-SA', options);
 }
 
 // الحصول على اسم الشهر الهجري
@@ -1168,7 +1216,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // تحديث التواريخ مباشرة
   if (document.getElementById('gregorianDate').value) {
     const date = new Date(document.getElementById('gregorianDate').value);
-    const gregorianDateStr = formatGregorianDate(date);
+    const gregorianDateStr = formatGregorianDateAr(date);
     document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
     convertToHijri();
   }
