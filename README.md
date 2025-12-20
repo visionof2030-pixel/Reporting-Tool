@@ -313,102 +313,106 @@ button:active{
     font-weight: bold;
   }
   
-  /* ===== معلومات التقرير (مصغّرة) ===== */
+  /* ===== معلومات التقرير - تم تكبيرها ===== */
   .info-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:8px;
-    margin-bottom:12px;
+    gap:10px;
+    margin-bottom:15px;
   }
   
   .info-box{
     border:2px solid #cfd8dc;
-    border-radius:8px;
-    padding:6px 8px;
+    border-radius:10px;
+    padding:12px 10px;
     text-align:center;
-    font-size:12px;
-    min-height: 45px;
+    font-size:14px;
+    min-height: 80px; /* تم تكبيرها */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: #f9fbfb;
   }
   
   .info-box span{
     display:block;
     background:#0a3b40;
     color:white;
-    border-radius:5px;
-    padding:3px;
+    border-radius:6px;
+    padding:6px 4px; /* تم تكبيرها */
     font-weight:700;
-    font-size:10px;
-    margin-bottom:4px;
+    font-size:13px; /* تم تكبيرها */
+    margin-bottom:8px; /* تم تكبيرها */
+    line-height: 1.3;
   }
   
   .info-box div {
-    font-size: 11px;
-    line-height: 1.3;
+    font-size: 14px; /* تم تكبيرها */
+    line-height: 1.4;
     word-break: break-word;
+    font-weight: 600;
+    color: #0a3b40;
   }
   
   /* ===== المحتوى ===== */
   .grid-desc{
     display:flex;
-    gap:10px;
-    margin-bottom:12px;
+    gap:12px;
+    margin-bottom:15px;
   }
   
   .desc-box{
     border:2px solid #cfd8dc;
     border-radius:10px;
-    padding:10px;
+    padding:12px;
     background:#f9fbfb;
-    font-size:12px;
+    font-size:14px;
     display:flex;
     flex-direction:column;
   }
   
   .desc-box.big{
-    min-height:120px;
+    min-height:140px;
     flex:1;
   }
   
   .desc-box.small{
-    min-height:90px;
+    min-height:110px;
     flex:1;
   }
   
   .desc-box strong{
-    border-bottom:1px dashed #cfd8dc;
-    padding-bottom:6px;
-    margin-bottom:8px;
+    border-bottom:2px dashed #cfd8dc;
+    padding-bottom:8px;
+    margin-bottom:10px;
     color:#0a3b40;
-    font-size:13px;
+    font-size:15px;
   }
   
   .desc-box p{
     white-space:pre-line;
     flex:1;
-    font-size: 11px;
-    line-height: 1.4;
+    font-size: 13px;
+    line-height: 1.5;
   }
   
   .vertical{
-    width:35px;
+    width:40px;
     background:#eef3f1;
-    border-radius:8px;
+    border-radius:10px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:700;
-    font-size: 14px;
+    font-size: 16px;
   }
   
   /* ===== الصور مع الإطار ===== */
   .images-section {
-    margin-top: 15px;
+    margin-top: 20px;
     border: 2px solid #cfd8dc;
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 15px;
     background: #f9fbfb;
     page-break-inside: avoid;
   }
@@ -416,86 +420,88 @@ button:active{
   .images-title {
     text-align: center;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     color: #0a3b40;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
     border-bottom: 2px dashed #cfd8dc;
   }
   
   .images-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:12px;
+    gap:15px;
   }
   
   .image-container {
     border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px;
+    border-radius: 10px;
+    padding: 10px;
     background: white;
     text-align: center;
   }
   
   .images-grid img{
     width:100%;
-    height:130px;
+    height:150px;
     object-fit:cover;
-    border-radius:6px;
+    border-radius:8px;
     display: block;
     border: 1px solid #eee;
   }
   
   .image-caption {
-    font-size: 10px;
+    font-size: 12px;
     color: #666;
-    margin-top: 6px;
-    padding-top: 4px;
+    margin-top: 8px;
+    padding-top: 6px;
     border-top: 1px dotted #ddd;
     font-weight: bold;
   }
   
-  /* ===== التوقيعات - تم تكبير الخط ===== */
+  /* ===== التوقيعات ===== */
   .signatures{
-    margin-top:25px;
+    margin-top:30px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:50px;
+    gap:60px;
     border-top:3px solid #cfd8dc;
-    padding-top:18px;
+    padding-top:20px;
     page-break-inside: avoid;
   }
   
   .signature-box{
     text-align:center;
-    font-size:15px !important;
+    font-size:16px !important;
     font-weight: bold;
   }
   
   .signature-name {
-    font-size: 16px !important;
+    font-size: 18px !important;
     font-weight: bold;
     color: #0a3b40;
-    margin-bottom: 8px;
-    padding: 5px;
+    margin-bottom: 10px;
+    padding: 8px;
     background: #f0f7f5;
-    border-radius: 6px;
-    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    border: 2px solid #cfd8dc;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .signature-line{
     border-bottom:3px solid #000;
-    height:35px;
-    margin:12px 0;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    height:40px;
+    margin:15px auto;
+    width: 85%;
   }
   
   .signature-label {
-    font-size: 13px;
+    font-size: 14px;
     color: #555;
-    margin-top: 5px;
+    margin-top: 8px;
     font-weight: bold;
   }
 }
