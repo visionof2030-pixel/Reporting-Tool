@@ -409,7 +409,7 @@ button:active{
     padding:0 2px;
   }
   
-  /* ===== الصور مع الإطار ===== */
+  /* ===== الصور مع الإطار - حجم طبيعي ===== */
   .images-section {
     margin-top: 8px;
     border: 1px solid #cfd8dc;
@@ -445,7 +445,7 @@ button:active{
   
   .images-grid img{
     width:100%;
-    height:70px;
+    height:120px; /* حجم الصور الطبيعي */
     object-fit:cover;
     border-radius:2px;
     display: block;
@@ -1013,9 +1013,9 @@ function convertToHijri() {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   
-  // تنسيق التاريخ الميلادي للعرض
+  // تحديث التاريخ الميلادي في التقرير بشكل منفصل
   const gregorianDateStr = formatGregorianDate(date);
-  sync('gregorianDateReport', gregorianDateStr);
+  document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
   
   // استخدام مكتبة umalqura للتحويل
   try {
@@ -1023,7 +1023,7 @@ function convertToHijri() {
       const hijriDate = UmAlQura.GregorianToHijri(year, month, day);
       const hijriDateStr = `${hijriDate.hd} ${getHijriMonthName(hijriDate.hm)} ${hijriDate.hy} هـ`;
       hijriInput.value = hijriDateStr;
-      sync('hijriDateReport', hijriDateStr);
+      document.getElementById('hijriDateReport').textContent = hijriDateStr;
     } else {
       // في حالة فشل التحويل، نستخدم طريقة تقريبية
       const hijriYear = Math.round((year - 622) * (33/32));
@@ -1031,7 +1031,7 @@ function convertToHijri() {
       const hijriDay = day;
       const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
       hijriInput.value = hijriDateStr;
-      sync('hijriDateReport', hijriDateStr);
+      document.getElementById('hijriDateReport').textContent = hijriDateStr;
     }
   } catch (error) {
     console.error('خطأ في تحويل التاريخ:', error);
@@ -1041,7 +1041,7 @@ function convertToHijri() {
     const hijriDay = day;
     const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear} هـ`;
     hijriInput.value = hijriDateStr;
-    sync('hijriDateReport', hijriDateStr);
+    document.getElementById('hijriDateReport').textContent = hijriDateStr;
   }
 }
 
@@ -1050,10 +1050,11 @@ function updateDates() {
   const gregorianInput = document.getElementById('gregorianDate');
   
   if (gregorianInput.value) {
-    // تحديث التاريخ الميلادي في التقرير
     const date = new Date(gregorianInput.value);
+    
+    // تحديث التاريخ الميلادي في التقرير
     const gregorianDateStr = formatGregorianDate(date);
-    sync('gregorianDateReport', gregorianDateStr);
+    document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
     
     // تحويل إلى هجري
     convertToHijri();
@@ -1163,7 +1164,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const today = new Date();
   const formattedDate = today.toISOString().split('T')[0];
   document.getElementById('gregorianDate').value = formattedDate;
-  updateDates();
+  
+  // تحديث التواريخ مباشرة
+  if (document.getElementById('gregorianDate').value) {
+    const date = new Date(document.getElementById('gregorianDate').value);
+    const gregorianDateStr = formatGregorianDate(date);
+    document.getElementById('gregorianDateReport').textContent = gregorianDateStr;
+    convertToHijri();
+  }
 });
 </script>
 </body>
