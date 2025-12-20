@@ -303,14 +303,14 @@ body{
 
 /* ===== التقرير (لطباعة PDF - تم تحسينه) ===== */
 .report{display:none;}
-@page{size:A4;margin:10mm;}
+@page{size:A4;margin:8mm;}
 
 @media print{
   body{
     background:white;
     padding:0;
     margin:0;
-    font-size: 12px;
+    font-size: 11px;
   }
   
   .tool{display:none}
@@ -326,11 +326,11 @@ body{
   .header{
     background:#0a3b40;
     color:white;
-    padding:3px 4px;
-    border-radius:4px;
+    padding:2px 3px;
+    border-radius:3px;
     text-align:center;
-    font-size:10px;
-    margin-bottom:4px;
+    font-size:9px;
+    margin-bottom:3px;
     page-break-inside: avoid;
   }
 
@@ -338,17 +338,17 @@ body{
   .info-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    gap:3px;
-    margin-bottom:4px;
+    gap:2px;
+    margin-bottom:3px;
     page-break-inside: avoid;
   }
   .info-box{
     border:1px solid var(--border-color);
-    border-radius:5px;
-    padding:2px 3px;
+    border-radius:4px;
+    padding:2px;
     text-align:center;
-    font-size:9px;
-    min-height: 35px;
+    font-size:8px;
+    min-height: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -358,69 +358,69 @@ body{
     display:block;
     background:#0a3b40;
     color:white;
-    border-radius:3px;
-    padding:1px 2px;
+    border-radius:2px;
+    padding:1px;
     font-weight:700;
-    font-size:8px;
-    margin-bottom:2px;
+    font-size:7px;
+    margin-bottom:1px;
     page-break-inside: avoid;
   }
 
   /* ===== المحتوى ===== */
   .grid-desc{
     display:flex;
-    gap:5px;
-    margin-bottom:5px;
+    gap:4px;
+    margin-bottom:4px;
     page-break-inside: avoid;
   }
 
   .desc-box{
     border:1px solid var(--border-color);
-    border-radius:6px;
-    padding:5px 6px;
+    border-radius:5px;
+    padding:4px 5px;
     background:#f9fbfb;
-    font-size:10px;
+    font-size:9px;
     display:flex;
     flex-direction:column;
-    min-height: 85px;
+    min-height: 70px;
     page-break-inside: avoid;
   }
   .desc-box.big{
     flex:1;
-    min-height: 85px;
+    min-height: 70px;
     page-break-inside: avoid;
   }
   .desc-box.small{
     flex:1;
-    min-height: 70px;
+    min-height: 60px;
     page-break-inside: avoid;
   }
 
   .desc-box strong{
     border-bottom:1px dashed var(--border-color);
-    padding-bottom:3px;
-    margin-bottom:4px;
+    padding-bottom:2px;
+    margin-bottom:3px;
     color:#0a3b40;
-    font-size:10px;
+    font-size:9px;
     page-break-inside: avoid;
   }
   .desc-box p{
     white-space:pre-line;
     flex:1;
     margin:0;
-    font-size:9.5px;
+    font-size:8.5px;
     page-break-inside: avoid;
   }
 
   .vertical{
-    width:20px;
+    width:18px;
     background:#eef3f1;
-    border-radius:5px;
+    border-radius:4px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:700;
-    font-size:10px;
+    font-size:9px;
     page-break-inside: avoid;
   }
 
@@ -428,38 +428,38 @@ body{
   .images{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:6px;
-    margin-top:8px;
+    gap:5px;
+    margin-top:6px;
     page-break-inside: avoid;
   }
   .images img{
     width:100%;
-    height:90px;
+    height:80px;
     object-fit:cover;
-    border-radius:5px;
+    border-radius:4px;
     page-break-inside: avoid;
   }
 
   /* ===== التوقيعات ===== */
   .signatures{
-    margin-top:15px;
+    margin-top:12px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:25px;
+    gap:20px;
     border-top:1px solid var(--border-color);
-    padding-top:10px;
+    padding-top:8px;
     page-break-inside: avoid;
     page-break-before: avoid;
   }
   .signature-box{
     text-align:center;
-    font-size:10px;
+    font-size:9px;
     page-break-inside: avoid;
   }
   .signature-line{
     border-bottom:1px solid #000;
-    height:20px;
-    margin:5px 0;
+    height:18px;
+    margin:4px 0;
     page-break-inside: avoid;
   }
   
@@ -472,8 +472,8 @@ body{
   
   .report {
     page-break-inside: avoid;
-    orphans: 3;
-    widows: 3;
+    orphans: 4;
+    widows: 4;
   }
 }
 </style>
@@ -495,7 +495,7 @@ body{
     <div class="form-grid">
       <div class="form-group">
         <label for="education-department">إدارة التعليم</label>
-        <select id="education-department" oninput="sync('edu', this.options[this.selectedIndex].text)">
+        <select id="education-department" oninput="syncValue('edu', this.value)">
           <option value="">اختر إدارة التعليم</option>
           <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
           <option>الإدارة العامة للتعليم بمنطقة الرياض</option>
@@ -518,7 +518,7 @@ body{
 
       <div class="form-group">
         <label for="school">اسم المدرسة</label>
-        <input id="school" type="text" placeholder="أدخل اسم المدرسة" oninput="sync('school',this.value)">
+        <input id="school" type="text" placeholder="أدخل اسم المدرسة" oninput="syncValue('school',this.value)">
       </div>
 
       <div class="form-group">
@@ -543,34 +543,34 @@ body{
 
       <div class="form-group">
         <label for="report-title-select">عنوان التقرير</label>
-        <select id="report-title-select" onchange="sync('title', this.value)">
+        <select id="report-title-select" onchange="syncValue('title', this.value)">
           <option value="">اختر عنوان التقرير بعد اختيار البند التربوي</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="date">تاريخ التنفيذ</label>
-        <input id="date" type="text" placeholder="يوم/شهر/سنة" oninput="sync('date',this.value)" value="١٤٤٦/٠٧/٢٠">
+        <input id="date" type="text" placeholder="يوم/شهر/سنة" oninput="syncValue('date',this.value)" value="١٤٤٦/٠٧/٢٠">
       </div>
 
       <div class="form-group">
         <label for="target">المستهدفون</label>
-        <input id="target" type="text" placeholder="الطلاب - الفئة العمرية - الصف" oninput="sync('target',this.value)" value="طلاب الصف السادس">
+        <input id="target" type="text" placeholder="الطلاب - الفئة العمرية - الصف" oninput="syncValue('target',this.value)" value="طلاب الصف السادس">
       </div>
 
       <div class="form-group">
         <label for="count">عدد المستفيدين</label>
-        <input id="count" type="text" placeholder="أدخل العدد" oninput="sync('count',this.value)" value="٣٠">
+        <input id="count" type="text" placeholder="أدخل العدد" oninput="syncValue('count',this.value)" value="٣٠">
       </div>
 
       <div class="form-group">
         <label for="teacher">اسم المعلم</label>
-        <input id="teacher" type="text" placeholder="أدخل اسم المعلم" oninput="sync('teacher',this.value)" value="أحمد بن محمد السعيد">
+        <input id="teacher" type="text" placeholder="أدخل اسم المعلم" oninput="syncValue('teacher',this.value)" value="أحمد بن محمد السعيد">
       </div>
 
       <div class="form-group">
         <label for="principal">اسم مدير المدرسة</label>
-        <input id="principal" type="text" placeholder="أدخل اسم مدير المدرسة" oninput="sync('principal',this.value)" value="سعود بن عبدالله الحربي">
+        <input id="principal" type="text" placeholder="أدخل اسم مدير المدرسة" oninput="syncValue('principal',this.value)" value="سعود بن عبدالله الحربي">
       </div>
     </div>
 
@@ -659,7 +659,7 @@ body{
   </div>
 </div>
 
-<!-- قسم التقرير للطباعة (غير متغير) -->
+<!-- قسم التقرير للطباعة -->
 <div class="report">
 
 <div class="header">
@@ -825,6 +825,49 @@ const defaultTexts = {
   ]
 };
 
+// دالة مزامنة القيم (تم إصلاحها)
+function syncValue(id, value) {
+  // تحديث العنصر في قسم التقرير
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = value;
+  }
+  
+  // تحديث خاص للبند التربوي
+  if (id === 'title') {
+    const educationItem = document.getElementById('education-item');
+    if (educationItem && educationItem.value) {
+      const axisElement = document.getElementById('axis');
+      if (axisElement) {
+        axisElement.textContent = educationItem.value;
+      }
+    }
+  }
+}
+
+// دالة تحديث عناوين التقارير
+function updateReportTitles() {
+  const educationItem = document.getElementById('education-item');
+  const reportTitleSelect = document.getElementById('report-title-select');
+  const selectedCategory = educationItem.value;
+  
+  // تحديث حقل البند التربوي في التقرير
+  syncValue('axis', selectedCategory);
+  
+  // مسح القائمة الحالية
+  reportTitleSelect.innerHTML = '<option value="">اختر عنوان التقرير</option>';
+  
+  // إضافة الخيارات المناسبة
+  if (selectedCategory && reportCategories[selectedCategory]) {
+    reportCategories[selectedCategory].forEach(report => {
+      const option = document.createElement('option');
+      option.value = report;
+      option.textContent = report;
+      reportTitleSelect.appendChild(option);
+    });
+  }
+}
+
 // دالة لصق النص الافتراضي
 function pasteDefaultText(textareaId, text) {
   const textarea = document.getElementById(textareaId);
@@ -849,51 +892,6 @@ function clearText(textareaId, targetId, counterId) {
   // تشغيل حدث oninput يدوياً
   const event = new Event('input', { bubbles: true });
   textarea.dispatchEvent(event);
-}
-
-// دالة المزامنة مع إصلاح جميع الحقول
-function sync(id,val){
-  const element = document.getElementById(id);
-  if (element) {
-    element.textContent = val;
-  }
-  
-  // تحديث حقل البند التربوي في التقرير
-  if (id === 'title') {
-    const educationItem = document.getElementById('education-item');
-    if (educationItem.value) {
-      const axisElement = document.getElementById('axis');
-      if (axisElement) {
-        axisElement.textContent = educationItem.value;
-      }
-    }
-  }
-}
-
-// تحديث قائمة عناوين التقارير
-function updateReportTitles() {
-  const educationItem = document.getElementById('education-item');
-  const reportTitleSelect = document.getElementById('report-title-select');
-  const selectedCategory = educationItem.value;
-  
-  // تحديث حقل البند التربوي في التقرير
-  const axisElement = document.getElementById('axis');
-  if (axisElement) {
-    axisElement.textContent = selectedCategory;
-  }
-  
-  // مسح القائمة الحالية
-  reportTitleSelect.innerHTML = '<option value="">اختر عنوان التقرير</option>';
-  
-  // إضافة الخيارات المناسبة
-  if (selectedCategory && reportCategories[selectedCategory]) {
-    reportCategories[selectedCategory].forEach(report => {
-      const option = document.createElement('option');
-      option.value = report;
-      option.textContent = report;
-      reportTitleSelect.appendChild(option);
-    });
-  }
 }
 
 // دالة عد الكلمات مع إصلاح
@@ -957,6 +955,29 @@ imagesInput.addEventListener('change', e => {
   });
 });
 
+// دالة مزامنة جميع الحقول قبل الطباعة
+function syncAllFields() {
+  // قائمة بجميع الحقول التي يجب مزامنتها
+  const fields = [
+    { inputId: 'education-department', targetId: 'edu' },
+    { inputId: 'school', targetId: 'school' },
+    { inputId: 'education-item', targetId: 'axis' },
+    { inputId: 'report-title-select', targetId: 'title' },
+    { inputId: 'date', targetId: 'date' },
+    { inputId: 'target', targetId: 'target' },
+    { inputId: 'count', targetId: 'count' },
+    { inputId: 'teacher', targetId: 'teacher' },
+    { inputId: 'principal', targetId: 'principal' }
+  ];
+  
+  fields.forEach(field => {
+    const inputElement = document.getElementById(field.inputId);
+    if (inputElement && inputElement.value) {
+      syncValue(field.targetId, inputElement.value);
+    }
+  });
+}
+
 // دالة إعداد الطباعة
 function preparePrint() {
   // التحقق من الحقول المطلوبة
@@ -976,6 +997,9 @@ function preparePrint() {
     alert(`الرجاء تعبئة الحقول التالية:\n${missingFields.join('\n')}`);
     return;
   }
+  
+  // مزامنة جميع الحقول قبل الطباعة
+  syncAllFields();
   
   // بدء عملية الطباعة مباشرة
   window.print();
@@ -1002,13 +1026,6 @@ function resetForm(){
     }
   });
   
-  // مسح المحتوى النصي في قسم التقرير
-  document.querySelectorAll('.report [id]').forEach(e => {
-    if (!['c1', 'c2', 'c3', 'c4'].includes(e.id)) {
-      e.textContent = '';
-    }
-  });
-  
   // إعادة تعيين العدادات
   ['c1', 'c2', 'c3', 'c4'].forEach(counterId => {
     const counter = document.getElementById(counterId);
@@ -1027,11 +1044,7 @@ function resetForm(){
   document.getElementById('report-title-select').innerHTML = '<option value="">اختر عنوان التقرير بعد اختيار البند التربوي</option>';
   
   // مزامنة القيم الافتراضية
-  sync('date', document.getElementById('date').value);
-  sync('target', document.getElementById('target').value);
-  sync('count', document.getElementById('count').value);
-  sync('teacher', document.getElementById('teacher').value);
-  sync('principal', document.getElementById('principal').value);
+  syncAllFields();
   
   // إعادة التركيز على أول حقل
   document.getElementById('education-department').focus();
@@ -1039,12 +1052,10 @@ function resetForm(){
 
 // تهيئة القيم الافتراضية عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
-  // تعيين القيم الافتراضية
-  sync('date', document.getElementById('date').value);
-  sync('target', document.getElementById('target').value);
-  sync('count', document.getElementById('count').value);
-  sync('teacher', document.getElementById('teacher').value);
-  sync('principal', document.getElementById('principal').value);
+  // مزامنة القيم الافتراضية عند تحميل الصفحة
+  setTimeout(() => {
+    syncAllFields();
+  }, 100);
 });
 </script>
 
