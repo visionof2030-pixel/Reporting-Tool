@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أداة إعداد التقارير التعليمية</title>
 <script src="https://cdn.jsdelivr.net/npm/umalqura@2.0.0/umalqura.min.js"></script>
 <style>
@@ -294,125 +296,125 @@ button:active{
 
 /* ===== التقرير للطباعة ===== */
 .report{display:none;}
-@page{size:A4;margin:14mm;}
+@page{size:A4;margin:12mm 10mm;}
 
 @media print{
-  body{background:white;padding:0}
+  body{background:white;padding:0; margin:0; font-size: 10px;}
   .tool{display:none}
-  .report{display:block}
+  .report{display:block; margin:0; padding:0; width:100%;}
   
   /* ===== الهيدر المصغر ===== */
   .header{
     background:#0a3b40;
     color:white;
-    padding:8px 10px;
-    border-radius:8px;
+    padding:5px 6px;
+    border-radius:4px;
     text-align:center;
-    font-size:14px;
-    margin-bottom:10px;
+    font-size:10px;
+    margin-bottom:6px;
     font-weight: bold;
+    line-height: 1.2;
   }
   
-  /* ===== معلومات التقرير - تم تكبيرها ===== */
+  /* ===== معلومات التقرير (مصغّرة جداً) ===== */
   .info-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:10px;
-    margin-bottom:15px;
+    gap:4px;
+    margin-bottom:6px;
+    font-size: 9px;
   }
   
   .info-box{
-    border:2px solid #cfd8dc;
-    border-radius:10px;
-    padding:12px 10px;
+    border:1px solid #cfd8dc;
+    border-radius:3px;
+    padding:3px 4px;
     text-align:center;
-    font-size:14px;
-    min-height: 80px; /* تم تكبيرها */
+    font-size:8px;
+    min-height: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #f9fbfb;
+    line-height: 1.1;
   }
   
   .info-box span{
     display:block;
     background:#0a3b40;
     color:white;
-    border-radius:6px;
-    padding:6px 4px; /* تم تكبيرها */
+    border-radius:2px;
+    padding:1px 2px;
     font-weight:700;
-    font-size:13px; /* تم تكبيرها */
-    margin-bottom:8px; /* تم تكبيرها */
-    line-height: 1.3;
+    font-size:7px;
+    margin-bottom:2px;
   }
   
   .info-box div {
-    font-size: 14px; /* تم تكبيرها */
-    line-height: 1.4;
+    font-size: 8px;
+    line-height: 1.1;
     word-break: break-word;
-    font-weight: 600;
-    color: #0a3b40;
   }
   
   /* ===== المحتوى ===== */
   .grid-desc{
     display:flex;
-    gap:12px;
-    margin-bottom:15px;
+    gap:5px;
+    margin-bottom:6px;
   }
   
   .desc-box{
-    border:2px solid #cfd8dc;
-    border-radius:10px;
-    padding:12px;
+    border:1px solid #cfd8dc;
+    border-radius:4px;
+    padding:4px;
     background:#f9fbfb;
-    font-size:14px;
+    font-size:8px;
     display:flex;
     flex-direction:column;
   }
   
   .desc-box.big{
-    min-height:140px;
+    min-height:70px;
     flex:1;
   }
   
   .desc-box.small{
-    min-height:110px;
+    min-height:60px;
     flex:1;
   }
   
   .desc-box strong{
-    border-bottom:2px dashed #cfd8dc;
-    padding-bottom:8px;
-    margin-bottom:10px;
+    border-bottom:1px dashed #cfd8dc;
+    padding-bottom:3px;
+    margin-bottom:3px;
     color:#0a3b40;
-    font-size:15px;
+    font-size:9px;
   }
   
   .desc-box p{
     white-space:pre-line;
     flex:1;
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 8px;
+    line-height: 1.2;
   }
   
   .vertical{
-    width:40px;
+    width:18px;
     background:#eef3f1;
-    border-radius:10px;
+    border-radius:3px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:700;
-    font-size: 16px;
+    font-size: 9px;
+    padding:0 2px;
   }
   
   /* ===== الصور مع الإطار ===== */
   .images-section {
-    margin-top: 20px;
-    border: 2px solid #cfd8dc;
-    border-radius: 12px;
-    padding: 15px;
+    margin-top: 8px;
+    border: 1px solid #cfd8dc;
+    border-radius: 4px;
+    padding: 6px;
     background: #f9fbfb;
     page-break-inside: avoid;
   }
@@ -420,88 +422,91 @@ button:active{
   .images-title {
     text-align: center;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 9px;
     color: #0a3b40;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px dashed #cfd8dc;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed #cfd8dc;
   }
   
   .images-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:15px;
+    gap:6px;
   }
   
   .image-container {
     border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 3px;
+    padding: 3px;
     background: white;
     text-align: center;
   }
   
   .images-grid img{
     width:100%;
-    height:150px;
+    height:70px;
     object-fit:cover;
-    border-radius:8px;
+    border-radius:2px;
     display: block;
     border: 1px solid #eee;
   }
   
   .image-caption {
-    font-size: 12px;
+    font-size: 7px;
     color: #666;
-    margin-top: 8px;
-    padding-top: 6px;
+    margin-top: 2px;
+    padding-top: 1px;
     border-top: 1px dotted #ddd;
     font-weight: bold;
   }
   
   /* ===== التوقيعات ===== */
   .signatures{
-    margin-top:30px;
+    margin-top:10px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:60px;
-    border-top:3px solid #cfd8dc;
-    padding-top:20px;
+    gap:20px;
+    border-top:1px solid #cfd8dc;
+    padding-top:8px;
     page-break-inside: avoid;
   }
   
   .signature-box{
     text-align:center;
-    font-size:16px !important;
+    font-size:9px !important;
     font-weight: bold;
   }
   
   .signature-name {
-    font-size: 18px !important;
+    font-size: 10px !important;
     font-weight: bold;
     color: #0a3b40;
-    margin-bottom: 10px;
-    padding: 8px;
+    margin-bottom: 3px;
+    padding: 2px 3px;
     background: #f0f7f5;
-    border-radius: 8px;
-    border: 2px solid #cfd8dc;
-    min-height: 40px;
+    border-radius: 3px;
+    border: 1px solid #cfd8dc;
+    line-height: 1.1;
+    min-height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
   .signature-line{
-    border-bottom:3px solid #000;
-    height:40px;
-    margin:15px auto;
-    width: 85%;
+    border-bottom:1px solid #000;
+    height:18px;
+    margin:4px 0;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .signature-label {
-    font-size: 14px;
+    font-size: 8px;
     color: #555;
-    margin-top: 8px;
+    margin-top: 2px;
     font-weight: bold;
   }
 }
@@ -531,6 +536,10 @@ button:active{
   }
 }
 
+/* استثناء لعناصر التقرير في الواجهة */
+.report * {
+  box-sizing: border-box;
+}
 </style>
 </head>
 
